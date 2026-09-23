@@ -1,0 +1,349 @@
+{
+  "schema_version": "1.0",
+  "generator":
+    {
+      "platform": "Claude",
+      "provider": "Anthropic",
+      "model": "claude-opus-4-8",
+      "skill": "saas-interface-channel-analyzer",
+      "skill_version": "1.0",
+    },
+  "generated_at": "2026-09-22T00:00:00Z",
+  "evidence_checked_at": "2026-09-22T00:00:00Z",
+  "saas": { "name": "Slack" },
+  "interfaces":
+    [
+      {
+        "name": "Web client",
+        "technology": "Web application at app.slack.com",
+        "channel": "Interactive",
+        "classification_rationale": "Actions are expressed by manipulating presented affordances (channels, messages, menus, forms) over a persistent, navigable representation of workspace state.",
+        "provenance":
+          [
+            {
+              "url": "https://slack.com/downloads/mac",
+              "evidence": "Official downloads pages present the web app alongside native clients as a first-party surface.",
+            },
+          ],
+      },
+      {
+        "name": "Desktop app",
+        "technology": "Native Windows / macOS / Linux client",
+        "channel": "Interactive",
+        "classification_rationale": "A separate first-party client surface whose primitive is affordance manipulation over a navigable representation of service state.",
+        "provenance":
+          [
+            {
+              "url": "https://slack.com/downloads/windows",
+              "evidence": "Official installer for Windows with system-tray integration and global shortcuts.",
+            },
+            {
+              "url": "https://slack.com/downloads/linux",
+              "evidence": "Official .rpm and .deb Linux packages.",
+            },
+          ],
+      },
+      {
+        "name": "Mobile app",
+        "technology": "Native iOS / Android apps",
+        "channel": "Interactive",
+        "classification_rationale": "Independent first-party client surface; actions are expressed through affordance manipulation with real-time sync.",
+        "provenance":
+          [
+            {
+              "url": "https://slack.com/downloads/android",
+              "evidence": "Official Android app distributed via Google Play.",
+            },
+            {
+              "url": "https://slack.com/intl/en-gb/downloads/ios",
+              "evidence": "Official iOS app distributed via the App Store.",
+            },
+          ],
+      },
+      {
+        "name": "Web API",
+        "technology": "HTTP RPC methods at slack.com/api/METHOD.method, bearer token",
+        "channel": "Programmatic",
+        "classification_rationale": "The consumer explicitly invokes provider-defined operations through structured HTTP RPC requests (Operation Invocation).",
+        "provenance":
+          [
+            {
+              "url": "https://docs.slack.dev/apis/web-api/",
+              "evidence": "Collection of 200+ HTTP RPC-style methods over HTTPS with bearer-token auth; absorbs Conversations, Calls, Presence, Slack Connect, Legal Holds, admin methods and the Real-Time Search API sharing the same base and auth.",
+            },
+          ],
+      },
+      {
+        "name": "Incoming Webhooks",
+        "technology": "POST to a secret URL at hooks.slack.com/services/...",
+        "channel": "Programmatic",
+        "classification_rationale": "Consumer-to-Slack direction: the consumer invokes a post-message operation against a unique webhook URL; distinct base and auth model from the Web API.",
+        "provenance":
+          [
+            {
+              "url": "https://github.com/slackhq/node-slack-sdk",
+              "evidence": "Official SDK describes @slack/webhook for sending notifications to a channel via incoming webhooks.",
+            },
+          ],
+      },
+      {
+        "name": "SCIM API",
+        "technology": "SCIM 2.0 standard REST, admin token",
+        "channel": "Programmatic",
+        "classification_rationale": "Explicit invocation of provider-defined provisioning operations following the SCIM standard; separate base and auth but the same operation-invocation paradigm.",
+        "provenance":
+          [
+            {
+              "url": "https://docs.slack.dev/apis/",
+              "evidence": "SCIM API listed for user provisioning and management.",
+            },
+          ],
+      },
+      {
+        "name": "Audit Logs API",
+        "technology": "Audit REST endpoints, organization admin token",
+        "channel": "Programmatic",
+        "classification_rationale": "The consumer explicitly invokes audit operations (the /logs endpoint) over a distinct base and auth; Operation Invocation.",
+        "provenance":
+          [
+            {
+              "url": "https://docs.slack.dev/tools/python-slack-sdk/audit-logs/index.html",
+              "evidence": "Official Audit Logs client documents the /logs endpoint for SIEM tools requiring an org admin token.",
+            },
+          ],
+      },
+      {
+        "name": "Status API",
+        "technology": "Health-monitoring API",
+        "channel": "Programmatic",
+        "classification_rationale": "The consumer queries provider-defined operations to monitor product health; Operation Invocation.",
+        "provenance":
+          [
+            {
+              "url": "https://docs.slack.dev/apis/",
+              "evidence": "Official APIs index describes the Status API as a programmatic way to monitor the health of the Slack product.",
+            },
+          ],
+      },
+      {
+        "name": "Slack CLI",
+        "technology": "Command-line interface for creating and managing apps",
+        "channel": "Programmatic",
+        "classification_rationale": "Actions are expressed as explicit commands authorized against the workspace; the command reference shows no persistent navigable TUI dashboard, so no second Interactive interface arises.",
+        "provenance":
+          [
+            {
+              "url": "https://docs.slack.dev/tools/slack-cli/",
+              "evidence": "CLI to create and manage Slack apps from the command line, with an authorization flow and a command reference.",
+            },
+          ],
+      },
+      {
+        "name": "Events API and interactivity",
+        "technology": "HTTP delivery to a Request URL, or Socket Mode WebSocket",
+        "channel": "Event",
+        "classification_rationale": "The service initiates delivery when a subscribed event or user interaction occurs and pushes the payload to a consumer-controlled receiver (Event Notification); Socket Mode is a transport for the same contract.",
+        "provenance":
+          [
+            {
+              "url": "https://docs.slack.dev/apis/",
+              "evidence": "Events API documented with HTTP Request URLs and Socket Mode; interactivity (slash commands, shortcuts, block actions) delivers payloads to a configured Request URL.",
+            },
+          ],
+      },
+      {
+        "name": "Legacy RTM API",
+        "technology": "WebSocket real-time event stream",
+        "channel": "Event",
+        "classification_rationale": "The service streams real-time events to the consumer's persistent WebSocket receiver. Deprecated/legacy, retained for inventory completeness; adds no new channel.",
+        "provenance":
+          [
+            {
+              "url": "https://docs.slack.dev/apis/",
+              "evidence": "Described as an outmoded WebSocket API providing access to some functionality of the Web and Events APIs.",
+            },
+          ],
+      },
+      {
+        "name": "Slack MCP server",
+        "technology": "JSON-RPC 2.0 over Streamable HTTP at mcp.slack.com/mcp",
+        "channel": "Agentic",
+        "classification_rationale": "Exposes semantically described tools (search, read/send messages, canvases, lists, files, users) that MCP clients discover and select as part of the interaction contract (Capability Discovery and Invocation).",
+        "provenance":
+          [
+            {
+              "url": "https://docs.slack.dev/ai/slack-mcp-server",
+              "evidence": "Official MCP server at mcp.slack.com/mcp exposing a documented tool set over JSON-RPC 2.0, with OAuth and admin-approved client apps.",
+            },
+          ],
+      },
+      {
+        "name": "Slackbot AI assistant",
+        "technology": "Natural-language conversational assistant with internal tool orchestration",
+        "channel": "Conversational",
+        "classification_rationale": "The consumer interacts through natural-language messages interpreted by the service; tool orchestration via Slackbot's MCP client is internal, not a consumer-facing discovery contract, so it is Conversational rather than Agentic.",
+        "provenance":
+          [
+            {
+              "url": "https://slack.com/blog/news/slackbots-mcp-client",
+              "evidence": "Slackbot presented as a single conversational interface: the user asks in plain language and Slackbot locates the right tool and coordinates the steps.",
+            },
+          ],
+      },
+    ],
+  "access_mechanism_ledger":
+    [
+      {
+        "mechanism": "Web API (Conversations, Calls, Presence, Slack Connect, Real-Time Search API)",
+        "disposition": "interface",
+        "detail": "Web API",
+      },
+      {
+        "mechanism": "Incoming Webhooks",
+        "disposition": "interface",
+        "detail": "Incoming Webhooks",
+      },
+      {
+        "mechanism": "SCIM API",
+        "disposition": "interface",
+        "detail": "SCIM API",
+      },
+      {
+        "mechanism": "Audit Logs API",
+        "disposition": "interface",
+        "detail": "Audit Logs API",
+      },
+      {
+        "mechanism": "Legal Holds API",
+        "disposition": "excluded",
+        "detail": "Method family sharing base and auth with the Web API; folded into Web API",
+      },
+      {
+        "mechanism": "Admin Oversight API / admin methods",
+        "disposition": "excluded",
+        "detail": "Method family with the same base and auth; folded into Web API",
+      },
+      {
+        "mechanism": "Status API",
+        "disposition": "interface",
+        "detail": "Status API",
+      },
+      {
+        "mechanism": "Slack CLI",
+        "disposition": "interface",
+        "detail": "Slack CLI",
+      },
+      {
+        "mechanism": "Events API",
+        "disposition": "interface",
+        "detail": "Events API and interactivity",
+      },
+      {
+        "mechanism": "Interactivity (slash commands, shortcuts, block actions, views)",
+        "disposition": "interface",
+        "detail": "Events API and interactivity (same event-delivery paradigm)",
+      },
+      {
+        "mechanism": "HTTP Request URLs",
+        "disposition": "excluded",
+        "detail": "Delivery configuration for Events API and interactivity, not an interface",
+      },
+      {
+        "mechanism": "Socket Mode",
+        "disposition": "excluded",
+        "detail": "Alternate WebSocket transport for Events API and interactivity, not a separate interface",
+      },
+      {
+        "mechanism": "Legacy RTM API",
+        "disposition": "interface",
+        "detail": "Legacy RTM API (deprecated)",
+      },
+      {
+        "mechanism": "Legacy Outgoing Webhooks",
+        "disposition": "excluded",
+        "detail": "Legacy custom integration superseded by the Events API; same Event paradigm",
+      },
+      {
+        "mechanism": "Slack MCP server (mcp.slack.com)",
+        "disposition": "interface",
+        "detail": "Slack MCP server",
+      },
+      {
+        "mechanism": "Slackbot as MCP client",
+        "disposition": "excluded",
+        "detail": "Slack consuming external servers, not an access path into Slack; its user-facing side is the Slackbot conversational assistant",
+      },
+      {
+        "mechanism": "Slackbot / conversational AI assistant",
+        "disposition": "interface",
+        "detail": "Slackbot AI assistant",
+      },
+      {
+        "mechanism": "Web client",
+        "disposition": "interface",
+        "detail": "Web client",
+      },
+      {
+        "mechanism": "Desktop app (Windows/macOS/Linux)",
+        "disposition": "interface",
+        "detail": "Desktop app",
+      },
+      {
+        "mechanism": "Mobile app (iOS/Android)",
+        "disposition": "interface",
+        "detail": "Mobile app",
+      },
+      {
+        "mechanism": "Workflow Builder",
+        "disposition": "excluded",
+        "detail": "Affordance-manipulation feature within the web/desktop client, same paradigm and contract, not a separate interface",
+      },
+      {
+        "mechanism": "Block Kit / Block Kit Builder",
+        "disposition": "excluded",
+        "detail": "UI framework and its design playground, not an access mechanism",
+      },
+      {
+        "mechanism": "Slack MCP and Skills Plugin",
+        "disposition": "excluded",
+        "detail": "Packaging of the MCP server and skills for AI coding tools, part of the MCP path, not a separate access interface",
+      },
+      {
+        "mechanism": "Bolt frameworks (Java/JS/Python), Deno Slack SDK, client libraries",
+        "disposition": "excluded",
+        "detail": "SDKs and frameworks, not interfaces",
+      },
+      {
+        "mechanism": "Slack GitHub Action",
+        "disposition": "excluded",
+        "detail": "CI wrapper over the CLI/API, not an interface",
+      },
+      {
+        "mechanism": "OAuth / token handling",
+        "disposition": "excluded",
+        "detail": "Authentication mechanism",
+      },
+      {
+        "mechanism": "App manifests",
+        "disposition": "excluded",
+        "detail": "Configuration format",
+      },
+      {
+        "mechanism": "Slack Marketplace / third-party integrations",
+        "disposition": "excluded",
+        "detail": "Third-party app distribution, not a provider-defined interface",
+      },
+    ],
+  "channel_evidence":
+    {
+      "Interactive": "observed",
+      "Agentic": "observed",
+      "Conversational": "observed",
+      "Event": "observed",
+      "Programmatic": "observed",
+    },
+  "number_of_interfaces": 13,
+  "multi_interface": true,
+  "number_of_channels": 5,
+  "multi_channel": true,
+}

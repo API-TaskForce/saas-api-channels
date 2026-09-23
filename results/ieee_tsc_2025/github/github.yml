@@ -1,0 +1,279 @@
+{
+  "schema_version": "1.0",
+  "generator":
+    {
+      "platform": "Claude",
+      "provider": "Anthropic",
+      "model": "claude-opus-4-8",
+      "skill": "saas-interface-channel-analyzer",
+      "skill_version": "1.0",
+    },
+  "generated_at": "2026-09-22T00:00:00Z",
+  "evidence_checked_at": "2026-09-22T00:00:00Z",
+  "saas": { "name": "GitHub" },
+  "interfaces":
+    [
+      {
+        "name": "Web application (github.com)",
+        "technology": "Navigable web interface",
+        "channel": "Interactive",
+        "classification_rationale": "Actions are expressed by manipulating views, menus and forms over a persistent, navigable representation of repository, issue and pull request state.",
+        "provenance":
+          [
+            {
+              "url": "https://docs.github.com/en/repositories",
+              "evidence": "The web interface is documented throughout for creating and managing repositories, issues, pull requests and browsing code.",
+            },
+          ],
+      },
+      {
+        "name": "GitHub Mobile",
+        "technology": "First-party native mobile app (iOS/Android)",
+        "channel": "Interactive",
+        "classification_rationale": "First-party client where users triage, review and merge by manipulating UI affordances; distinct client surface from web and desktop.",
+        "provenance":
+          [
+            {
+              "url": "https://docs.github.com/en/get-started/using-github/github-mobile",
+              "evidence": "Described as a trusted, first-party client application for triaging, collaborating and managing work on GitHub.",
+            },
+          ],
+      },
+      {
+        "name": "GitHub Desktop",
+        "technology": "First-party GUI desktop app",
+        "channel": "Interactive",
+        "classification_rationale": "Provider-shipped graphical client to perform Git and GitHub operations through a GUI rather than the command line, with visual confirmation of changes.",
+        "provenance":
+          [
+            {
+              "url": "https://docs.github.com/en/desktop",
+              "evidence": "Lets you interact with GitHub using a GUI instead of the command line or a web browser.",
+            },
+          ],
+      },
+      {
+        "name": "REST API",
+        "technology": "HTTP REST API",
+        "channel": "Programmatic",
+        "classification_rationale": "The consumer explicitly invokes provider-defined endpoints via structured HTTP requests.",
+        "provenance":
+          [
+            {
+              "url": "https://docs.github.com/en/rest",
+              "evidence": "GitHub provides a REST API using standard HTTP verbs to extend and customize the GitHub experience.",
+            },
+          ],
+      },
+      {
+        "name": "GraphQL API",
+        "technology": "GraphQL API",
+        "channel": "Programmatic",
+        "classification_rationale": "The consumer invokes queries and mutations against a typed schema through a separate endpoint from REST, so a distinct Programmatic interface.",
+        "provenance":
+          [
+            {
+              "url": "https://docs.github.com/en/graphql",
+              "evidence": "Separate GraphQL endpoint and schema; all calls validated and executed against the schema.",
+            },
+          ],
+      },
+      {
+        "name": "GitHub CLI (gh)",
+        "technology": "Command-line tool",
+        "channel": "Programmatic",
+        "classification_rationale": "Operation invocation through structured commands from the terminal; interactive prompts collect parameters for the invoked command and are not a persistent navigable TUI.",
+        "provenance":
+          [
+            {
+              "url": "https://cli.github.com/manual/",
+              "evidence": "Official command line tool bringing pull requests, issues and other GitHub concepts to the terminal via commands.",
+            },
+          ],
+      },
+      {
+        "name": "Git remote operations (HTTPS/SSH)",
+        "technology": "Git remote protocol",
+        "channel": "Programmatic",
+        "classification_rationale": "Structured Git operations (clone, fetch, pull, push) against hosted repositories; HTTPS and SSH are transports of one operation set, hence a single interface.",
+        "provenance":
+          [
+            {
+              "url": "https://docs.github.com/en/get-started/git-basics/about-remote-repositories",
+              "evidence": "Push and pull to GitHub-hosted repositories via HTTPS and SSH remote URLs.",
+            },
+          ],
+      },
+      {
+        "name": "Inbound email (reply-to-comment)",
+        "technology": "Email submission to a tokenized reply-to address",
+        "channel": "Programmatic",
+        "classification_rationale": "Replying to a notification email posts the body as a comment on the thread identified by the reply-to token; the body is taken verbatim (quoted text stripped), not interpreted as natural language, so it is operation invocation.",
+        "provenance":
+          [
+            {
+              "url": "https://docs.github.com/en/subscriptions-and-notifications/get-started/configuring-notifications",
+              "evidence": "You can reply to email notifications and your reply is posted to the issue, pull request or discussion; the reply-to address identifies the thread and the account.",
+            },
+          ],
+      },
+      {
+        "name": "Webhooks",
+        "technology": "HTTP POST event delivery",
+        "channel": "Event",
+        "classification_rationale": "The service initiates an HTTP POST to a consumer-configured URL when subscribed events occur, delivering to a consumer-controlled receiver.",
+        "provenance":
+          [
+            {
+              "url": "https://docs.github.com/en/webhooks/about-webhooks",
+              "evidence": "On a subscribed event, GitHub sends an HTTP request with event data to the URL the consumer specified.",
+            },
+          ],
+      },
+      {
+        "name": "GitHub Copilot Chat",
+        "technology": "AI chat assistant",
+        "channel": "Conversational",
+        "classification_rationale": "The consumer-facing primitive is the natural-language message; internal tool orchestration (built-in MCP) is not part of the consumer contract, so Conversational rather than Agentic.",
+        "provenance":
+          [
+            {
+              "url": "https://docs.github.com/en/copilot/concepts/chat",
+              "evidence": "AI-powered chat interface for interacting with models in a conversational format; the GitHub MCP server is configured internally to perform a limited set of tasks on request.",
+            },
+          ],
+      },
+      {
+        "name": "GitHub MCP server",
+        "technology": "Model Context Protocol server",
+        "channel": "Agentic",
+        "classification_rationale": "First-party server exposing semantically described toolsets that are discoverable and selectable as part of the interaction contract by any MCP client; capability discovery and selection define the paradigm.",
+        "provenance":
+          [
+            {
+              "url": "https://github.com/github/github-mcp-server",
+              "evidence": "GitHub's official MCP server with a hosted remote endpoint (https://api.githubcopilot.com/mcp/) exposing selectable toolsets to AI clients.",
+            },
+            {
+              "url": "https://docs.github.com/en/copilot/concepts/context/mcp",
+              "evidence": "The GitHub MCP server can run in any MCP-compatible editor and exposes toolsets controlling which GitHub capabilities are available to AI tools.",
+            },
+          ],
+      },
+    ],
+  "access_mechanism_ledger":
+    [
+      {
+        "mechanism": "Web application (first-party web surface)",
+        "disposition": "interface",
+        "detail": "Web application (Interactive)",
+      },
+      {
+        "mechanism": "Mobile app (first-party mobile surface)",
+        "disposition": "interface",
+        "detail": "GitHub Mobile (Interactive)",
+      },
+      {
+        "mechanism": "Desktop app (first-party desktop surface)",
+        "disposition": "interface",
+        "detail": "GitHub Desktop (Interactive)",
+      },
+      {
+        "mechanism": "First-party terminal surface (gh TUI)",
+        "disposition": "excluded",
+        "detail": "gh ships no persistent navigable TUI; its prompts are parameter collection for the invoked command",
+      },
+      {
+        "mechanism": "REST API",
+        "disposition": "interface",
+        "detail": "REST API (Programmatic)",
+      },
+      {
+        "mechanism": "GraphQL API",
+        "disposition": "interface",
+        "detail": "GraphQL API (Programmatic)",
+      },
+      {
+        "mechanism": "GitHub CLI (gh)",
+        "disposition": "interface",
+        "detail": "GitHub CLI (Programmatic)",
+      },
+      {
+        "mechanism": "Git remote operations (HTTPS/SSH)",
+        "disposition": "interface",
+        "detail": "Git remote operations (Programmatic)",
+      },
+      {
+        "mechanism": "Inbound email (reply-to-comment)",
+        "disposition": "interface",
+        "detail": "Inbound email (Programmatic)",
+      },
+      {
+        "mechanism": "Email notifications (outbound)",
+        "disposition": "excluded",
+        "detail": "Notifications feature delivered to a mailbox; the provider's event-delivery interface with a consumer-controlled receiver is Webhooks",
+      },
+      {
+        "mechanism": "Webhooks",
+        "disposition": "interface",
+        "detail": "Webhooks (Event)",
+      },
+      {
+        "mechanism": "GitHub Copilot Chat (web, mobile, IDE, CLI)",
+        "disposition": "interface",
+        "detail": "GitHub Copilot Chat (Conversational); surfaces share the natural-language message contract",
+      },
+      {
+        "mechanism": "Copilot coding agent (assign issue to Copilot)",
+        "disposition": "excluded",
+        "detail": "Agent capability invoked through existing interfaces (web UI, Copilot Chat, MCP tool), not a separate interaction contract",
+      },
+      {
+        "mechanism": "GitHub MCP server",
+        "disposition": "interface",
+        "detail": "GitHub MCP server (Agentic)",
+      },
+      {
+        "mechanism": "Octokit SDKs / client libraries",
+        "disposition": "excluded",
+        "detail": "Wrappers over REST/GraphQL, not interfaces",
+      },
+      {
+        "mechanism": "GitHub Apps / OAuth apps",
+        "disposition": "excluded",
+        "detail": "Authentication and integration framework consuming REST/GraphQL/webhooks, not an access interface itself",
+      },
+      {
+        "mechanism": "Third-party integrations / Marketplace",
+        "disposition": "excluded",
+        "detail": "Not provider-defined interfaces",
+      },
+      {
+        "mechanism": "GitHub Actions",
+        "disposition": "excluded",
+        "detail": "CI/CD product consumed via web/API/git, not a distinct provider access interface",
+      },
+      {
+        "mechanism": "GitHub Codespaces",
+        "disposition": "excluded",
+        "detail": "Hosted dev environment; access to GitHub from it is via git/API/web",
+      },
+      {
+        "mechanism": "GitHub Pages",
+        "disposition": "excluded",
+        "detail": "Static hosting product, not an access mechanism to the service",
+      },
+    ],
+  "channel_evidence":
+    {
+      "Interactive": "observed",
+      "Agentic": "observed",
+      "Conversational": "observed",
+      "Event": "observed",
+      "Programmatic": "observed",
+    },
+  "number_of_interfaces": 11,
+  "multi_interface": true,
+  "number_of_channels": 5,
+  "multi_channel": true,
+}

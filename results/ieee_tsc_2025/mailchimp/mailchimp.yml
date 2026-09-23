@@ -1,0 +1,288 @@
+{
+  "schema_version": "1.0",
+  "generator":
+    {
+      "platform": "Claude",
+      "provider": "Anthropic",
+      "model": "claude-opus-4-8",
+      "skill": "saas-interface-channel-analyzer",
+      "skill_version": "1.0",
+    },
+  "generated_at": "2026-09-23T12:00:00Z",
+  "evidence_checked_at": "2026-09-23T12:00:00Z",
+  "saas": { "name": "Mailchimp" },
+  "interfaces":
+    [
+      {
+        "name": "Web application",
+        "technology": "Browser-based web client",
+        "channel": "Interactive",
+        "classification_rationale": "Actions are expressed by manipulating views, menus, and forms over persistent account state; help docs point users to the full web version for anything the mobile app cannot do.",
+        "provenance":
+          [
+            {
+              "url": "https://mailchimp.com/help/about-mailchimp-for-ios/",
+              "evidence": "States the full version of Mailchimp is accessed in a web browser when a task is unavailable in the mobile app.",
+            },
+          ],
+      },
+      {
+        "name": "Mobile app (iOS and Android)",
+        "technology": "Native iOS and Android clients",
+        "channel": "Interactive",
+        "classification_rationale": "First-party apps with navigation tabs and a Quick Actions menu; the consumer manipulates on-screen affordances of account state.",
+        "provenance":
+          [
+            {
+              "url": "https://mailchimp.com/features/mailchimp-mobile/",
+              "evidence": "Documents free iOS and Android apps to manage contacts, build campaigns, and track performance.",
+            },
+            {
+              "url": "https://mailchimp.com/help/about-mailchimp-for-android/",
+              "evidence": "Describes Home, Audience, Campaigns, and Analytics tabs and a Quick Actions menu.",
+            },
+          ],
+      },
+      {
+        "name": "Marketing API (v3.0)",
+        "technology": "REST over HTTPS",
+        "channel": "Programmatic",
+        "classification_rationale": "REST resources under one datacenter-suffixed base with API key or OAuth 2; the consumer explicitly invokes provider-defined operations.",
+        "provenance":
+          [
+            {
+              "url": "https://mailchimp.com/developer/marketing/docs/fundamentals/",
+              "evidence": "Defines the v3.0 REST Marketing API, its base, versioning, and authentication.",
+            },
+            {
+              "url": "https://mailchimp.com/developer/marketing/api/",
+              "evidence": "Full API reference of campaigns, lists, reports, and other resources.",
+            },
+          ],
+      },
+      {
+        "name": "Transactional API (Mandrill)",
+        "technology": "REST over HTTPS",
+        "channel": "Programmatic",
+        "classification_rationale": "Distinct REST API at a separate base with its own API key covering transactional email and SMS; explicit operation invocation.",
+        "provenance":
+          [
+            {
+              "url": "https://mandrillapp.com/docs/",
+              "evidence": "Documents delivering transactional email and SMS via the API, distinct from the Marketing API.",
+            },
+          ],
+      },
+      {
+        "name": "Transactional SMTP relay",
+        "technology": "SMTP submission",
+        "channel": "Programmatic",
+        "classification_rationale": "Structured message submission over SMTP to smtp.mandrillapp.com; operation invocation with a mail-protocol primitive distinct from the REST APIs.",
+        "provenance":
+          [
+            {
+              "url": "https://mailchimp.com/developer/transactional/docs/smtp-integration/",
+              "evidence": "Describes sending via SMTP with supported ports and TLS/SSL options.",
+            },
+          ],
+      },
+      {
+        "name": "Export API (v1.0)",
+        "technology": "HTTP bulk export",
+        "channel": "Programmatic",
+        "classification_rationale": "Single-purpose API at a separate base returning streaming bulk export data; different base and control structure from the Marketing REST API.",
+        "provenance":
+          [
+            {
+              "url": "https://mailchimp.com/developer/marketing/docs/fundamentals/",
+              "evidence": "States a single-purpose Export API version 1.0 is supported for account export functionality.",
+            },
+          ],
+      },
+      {
+        "name": "Marketing webhooks",
+        "technology": "Service-initiated HTTP callbacks",
+        "channel": "Event",
+        "classification_rationale": "Mailchimp posts subscribed audience and account events to a consumer-controlled URL; event notification initiated by the service.",
+        "provenance":
+          [
+            {
+              "url": "https://mailchimp.com/developer/marketing/guides/sync-audience-data-webhooks/",
+              "evidence": "Documents webhook delivery of audience events to a consumer endpoint.",
+            },
+          ],
+      },
+      {
+        "name": "Transactional webhooks and inbound routing",
+        "technology": "Service-initiated HTTP callbacks and inbound email parsing",
+        "channel": "Event",
+        "classification_rationale": "Real-time event webhooks and inbound email parsed and delivered to the consumer's endpoint from the Transactional platform; separate base and account from Marketing webhooks.",
+        "provenance":
+          [
+            {
+              "url": "https://mandrillapp.com/docs/",
+              "evidence": "Describes real-time insight webhooks and receiving, processing, and parsing inbound email.",
+            },
+          ],
+      },
+      {
+        "name": "Analytics AI (in-product assistant)",
+        "technology": "Native GenAI assistant",
+        "channel": "Conversational",
+        "classification_rationale": "The user asks plain-language questions and the service interprets the message and responds; tool orchestration is internal to Mailchimp.",
+        "provenance":
+          [
+            {
+              "url": "https://mailchimp.com/help/use-analytics-ai/",
+              "evidence": "Describes a conversational assistant built into the account answering plain-language questions about campaigns, audience, and revenue.",
+            },
+            {
+              "url": "https://mailchimp.com/solutions/ai-tools/",
+              "evidence": "Positions Analytics AI as part of Mailchimp with Intuit Intelligence for plain-language performance insights.",
+            },
+          ],
+      },
+      {
+        "name": "AI assistant connectors (ChatGPT, Claude, Perplexity, Codex, Google Workspace)",
+        "technology": "Official assistant connectors and ChatGPT app",
+        "channel": "Agentic",
+        "classification_rationale": "Mailchimp exposes capabilities that an external assistant discovers and invokes by the user's goal to build campaigns grounded in account data; capability discovery and selection structure the contract.",
+        "provenance":
+          [
+            {
+              "url": "https://mailchimp.com/solutions/ai-tools/",
+              "evidence": "States Mailchimp connects to ChatGPT, Claude, Perplexity, Codex, and Google Workspace, with connectors available on Standard and Premium plans.",
+            },
+            {
+              "url": "https://mailchimp.com/resources/connect-mailchimp-to-chatgpt/",
+              "evidence": "Documents an official Mailchimp app in the ChatGPT app store that exposes Mailchimp data and campaign-building capabilities to the assistant.",
+            },
+          ],
+      },
+    ],
+  "access_mechanism_ledger":
+    [
+      {
+        "mechanism": "Marketing API (REST v3.0)",
+        "disposition": "interface",
+        "detail": "Marketing API (v3.0)",
+      },
+      {
+        "mechanism": "Transactional API (Mandrill)",
+        "disposition": "interface",
+        "detail": "Transactional API (Mandrill)",
+      },
+      {
+        "mechanism": "Transactional SMS",
+        "disposition": "interface",
+        "detail": "Part of Transactional API (same base and auth)",
+      },
+      {
+        "mechanism": "Transactional SMTP",
+        "disposition": "interface",
+        "detail": "Transactional SMTP relay",
+      },
+      {
+        "mechanism": "Export API v1.0",
+        "disposition": "interface",
+        "detail": "Export API (v1.0)",
+      },
+      {
+        "mechanism": "Marketing webhooks",
+        "disposition": "interface",
+        "detail": "Marketing webhooks",
+      },
+      {
+        "mechanism": "Transactional webhooks and inbound email routing",
+        "disposition": "interface",
+        "detail": "Transactional webhooks and inbound routing",
+      },
+      {
+        "mechanism": "Web application",
+        "disposition": "interface",
+        "detail": "Web application",
+      },
+      {
+        "mechanism": "Mobile app (iOS and Android)",
+        "disposition": "interface",
+        "detail": "Mobile app (iOS and Android)",
+      },
+      {
+        "mechanism": "Desktop client",
+        "disposition": "excluded",
+        "detail": "No first-party desktop client documented; the full product is the web application",
+      },
+      {
+        "mechanism": "CLI",
+        "disposition": "excluded",
+        "detail": "No official first-party CLI found; only client libraries and SDKs are provided",
+      },
+      {
+        "mechanism": "TUI",
+        "disposition": "excluded",
+        "detail": "Not applicable, no first-party CLI or terminal client exists",
+      },
+      {
+        "mechanism": "Analytics AI (native assistant)",
+        "disposition": "interface",
+        "detail": "Analytics AI",
+      },
+      {
+        "mechanism": "AI assistant connectors (ChatGPT, Claude, Perplexity, Codex, Google Workspace)",
+        "disposition": "interface",
+        "detail": "AI assistant connectors",
+      },
+      {
+        "mechanism": "Mailchimp app in the ChatGPT app store",
+        "disposition": "interface",
+        "detail": "Part of AI assistant connectors",
+      },
+      {
+        "mechanism": "Google Workspace connector",
+        "disposition": "interface",
+        "detail": "Part of AI assistant connectors",
+      },
+      {
+        "mechanism": "Write with AI in-editor generation / Intuit Assist inline tools",
+        "disposition": "excluded",
+        "detail": "An affordance inside the web and mobile Interactive UI, not a separate logical interface",
+      },
+      {
+        "mechanism": "Client libraries and SDKs (including Mobile SDK)",
+        "disposition": "excluded",
+        "detail": "SDKs implement interfaces but are not interfaces",
+      },
+      {
+        "mechanism": "OAuth 2 and API keys",
+        "disposition": "excluded",
+        "detail": "Authentication methods, not interfaces",
+      },
+      {
+        "mechanism": "Integrations directory (300+ third-party integrations)",
+        "disposition": "excluded",
+        "detail": "Third-party integrations, not provider-defined interfaces",
+      },
+      {
+        "mechanism": "Third-party Mailchimp MCP servers",
+        "disposition": "excluded",
+        "detail": "Third-party wrappers over the Marketing API, not provider-defined",
+      },
+      {
+        "mechanism": "Open Commerce (Reaction Commerce), including its GraphQL API",
+        "disposition": "excluded",
+        "detail": "Separate open-source, self-hostable commerce product, not the hosted Mailchimp marketing SaaS",
+      },
+    ],
+  "channel_evidence":
+    {
+      "Interactive": "observed",
+      "Agentic": "observed",
+      "Conversational": "observed",
+      "Event": "observed",
+      "Programmatic": "observed",
+    },
+  "number_of_interfaces": 10,
+  "multi_interface": true,
+  "number_of_channels": 5,
+  "multi_channel": true,
+}

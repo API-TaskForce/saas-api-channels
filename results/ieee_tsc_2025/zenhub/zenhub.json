@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "generator": {
+    "platform": "Claude",
+    "provider": "Anthropic",
+    "model": "UNKNOWN",
+    "skill": "saas-interface-channel-analyzer",
+    "skill_version": "1.0"
+  },
+  "generated_at": "2026-09-24T21:42:19+02:00",
+  "evidence_checked_at": "2026-09-24T21:42:19+02:00",
+  "saas": {
+    "name": "Zenhub"
+  },
+  "interfaces": [
+    {
+      "name": "Web application",
+      "technology": "Web app (app.zenhub.com)",
+      "channel": "Interactive",
+      "classification_rationale": "A persistent, navigable representation of workspace state where actions are expressed by manipulating boards, menus, and forms (drag-and-drop pipelines, issue editing). Primitive is affordance manipulation.",
+      "provenance": [
+        {
+          "url": "https://support.zenhub.com/article/how-do-i-use-zenhubs-browser-extension-for-git-hub",
+          "evidence": "Provider states the web application at app.zenhub.com is a standalone project-management surface with dedicated views, presented as an interface distinct from the extension."
+        },
+        {
+          "url": "https://www.zenhub.com/faq",
+          "evidence": "Provider describes Zenhub as available 'as a full featured standalone web app', also available for Safari and mobile browsers."
+        }
+      ]
+    },
+    {
+      "name": "Browser extension",
+      "technology": "Zenhub for GitHub extension (Chrome, Firefox)",
+      "channel": "Interactive",
+      "classification_rationale": "Injects Zenhub affordances (boards, pipelines, controls) into GitHub's own pages; the consumer acts by manipulating those presented controls. Same paradigm as the web app but a distinct surface with a control structure bound to GitHub's page navigation.",
+      "provenance": [
+        {
+          "url": "https://support.zenhub.com/article/how-do-i-use-zenhubs-browser-extension-for-git-hub",
+          "evidence": "Provider documents the extension as adding project-management features directly within GitHub's interface, calling extension and web app 'both interfaces' with identical functionality."
+        }
+      ]
+    },
+    {
+      "name": "GraphQL API",
+      "technology": "GraphQL over HTTP POST (api.zenhub.com/public/graphql)",
+      "channel": "Programmatic",
+      "classification_rationale": "Consumer explicitly invokes provider-defined operations (queries and mutations) through structured requests to a fixed endpoint with a personal API key. Primitive is operation invocation.",
+      "provenance": [
+        {
+          "url": "https://developers.zenhub.com/graphql-api-docs/getting-started",
+          "evidence": "Official docs: POST requests to api.zenhub.com/public/graphql, authenticated by a Personal API Key, invoking GraphQL queries and mutations."
+        }
+      ]
+    },
+    {
+      "name": "REST API",
+      "technology": "REST over HTTP (legacy)",
+      "channel": "Programmatic",
+      "classification_rationale": "Consumer explicitly invokes provider-defined REST operations through structured requests. Distinct base and invocation style from GraphQL, so a separate Programmatic interface. Documented but legacy (GraphQL recommended for new projects).",
+      "provenance": [
+        {
+          "url": "https://developers.zenhub.com/",
+          "evidence": "Official overview lists the REST API as Zenhub's first public API offering, still linked (github.com/ZenHubIO/API), with GraphQL recommended for new work."
+        }
+      ]
+    },
+    {
+      "name": "MCP Server",
+      "technology": "Model Context Protocol server (api.zenhub.com/mcp)",
+      "channel": "Agentic",
+      "classification_rationale": "Exposes semantically described tools that an AI client discovers and selects by goal ('which issue should I work on'). Capability discovery and selection structure the interaction contract, so Agentic rather than Programmatic despite wrapping the GraphQL API.",
+      "provenance": [
+        {
+          "url": "https://developers.zenhub.com/mcp",
+          "evidence": "Official docs: the MCP server wraps the GraphQL API and exposes tools to search and modify issues and understand the sprint; the LLM figures out which tools to call to answer a goal."
+        }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "technology": "Outbound HTTP POST webhooks (custom and preset targets)",
+      "channel": "Event",
+      "classification_rationale": "Zenhub initiates the interaction when board events occur (issue_transfer, estimate_set, estimate_cleared, issue_reprioritized) and POSTs to a consumer-controlled receiver URL. Primitive is event notification.",
+      "provenance": [
+        {
+          "url": "https://developers.zenhub.com/webhooks",
+          "evidence": "Official docs: the custom webhook sends a POST request to your endpoint for multiple events occurring on your Zenhub board, configurable to Slack, Gitter, Spark, HipChat, or a custom receiver."
+        }
+      ]
+    }
+  ],
+  "access_mechanism_ledger": [
+    { "mechanism": "GraphQL API", "disposition": "interface", "detail": "GraphQL API" },
+    { "mechanism": "REST API", "disposition": "interface", "detail": "REST API" },
+    { "mechanism": "MCP Server", "disposition": "interface", "detail": "MCP Server" },
+    { "mechanism": "Webhooks", "disposition": "interface", "detail": "Webhooks" },
+    { "mechanism": "Web app (first-party web surface)", "disposition": "interface", "detail": "Web application" },
+    { "mechanism": "Browser extension", "disposition": "interface", "detail": "Browser extension" },
+    { "mechanism": "GraphQL Explorer (embedded GraphiQL)", "disposition": "excluded", "detail": "In-docs testing console for constructing and running GraphQL calls; it materializes the GraphQL API rather than being a separate production interface." },
+    { "mechanism": "Slack / Gitter / Spark / HipChat integrations", "disposition": "excluded", "detail": "Preset destinations configured through the Webhooks mechanism, not distinct provider interfaces." },
+    { "mechanism": "Mobile (first-party mobile surface)", "disposition": "excluded", "detail": "No native mobile app; the web app is reached through mobile browsers, which is the same web Interactive interface. (Unrelated 'ZenHub GFX' mobile apps are a different vendor.)" },
+    { "mechanism": "Desktop (first-party desktop surface)", "disposition": "excluded", "detail": "No native desktop client documented; access is via the web app." },
+    { "mechanism": "Terminal / CLI / TUI (first-party terminal surface)", "disposition": "excluded", "detail": "Zenhub ships no CLI or TUI. Gemini CLI / Claude Code are third-party MCP clients, not Zenhub interfaces." },
+    { "mechanism": "SDKs / client libraries (pyzenhub, zenhub-client, etc.)", "disposition": "excluded", "detail": "Third-party/community libraries wrapping the APIs; SDKs are not counted as interfaces." }
+  ],
+  "channel_evidence": {
+    "Interactive": "observed",
+    "Agentic": "observed",
+    "Conversational": "no_evidence_observed",
+    "Event": "observed",
+    "Programmatic": "observed"
+  },
+  "number_of_interfaces": 6,
+  "multi_interface": true,
+  "number_of_channels": 4,
+  "multi_channel": true
+}

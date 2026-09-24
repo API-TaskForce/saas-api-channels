@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "generator": {
+    "platform": "Claude",
+    "provider": "Anthropic",
+    "model": "UNKNOWN",
+    "skill": "saas-interface-channel-analyzer",
+    "skill_version": "1.0"
+  },
+  "generated_at": "2026-09-24T00:00:00Z",
+  "evidence_checked_at": "2026-09-24T00:00:00Z",
+  "saas": {
+    "name": "Quip"
+  },
+  "interfaces": [
+    {
+      "name": "Quip application (web, Mac desktop, iOS mobile clients)",
+      "technology": "Web, desktop and mobile GUI",
+      "channel": "Interactive",
+      "classification_rationale": "Actions are expressed by manipulating presented affordances (views, menus, forms) of a persistent, navigable representation of service state such as documents, spreadsheets, folders and chat rooms.",
+      "provenance": [
+        { "url": "https://quip.com/download", "evidence": "Official download page for the web, Mac desktop and mobile clients." },
+        { "url": "https://apps.apple.com/us/app/quip-docs-chat-sheets/id647922896", "evidence": "Provider App Store listing for the Mac/iPad/iPhone client." },
+        { "url": "https://quip.com/release-notes", "evidence": "Release notes confirming retirement of the Windows and Android apps on June 6, 2024, leaving web, Mac and iOS current." }
+      ]
+    },
+    {
+      "name": "Quip REST API (Automation and Admin methods)",
+      "technology": "REST/JSON over HTTPS, OAuth 2.0",
+      "channel": "Programmatic",
+      "classification_rationale": "The consumer explicitly invokes provider-defined operations (thread/folder/user management, export, admin monitoring) through structured HTTP requests. Automation and Admin share base, invocation style and auth, so they are one logical interface.",
+      "provenance": [
+        { "url": "https://quip.com/dev/automation/documentation/current", "evidence": "REST-based Automation API with OAuth 2.0; documents operations on threads, folders, messages and users." },
+        { "url": "https://quip.com/dev/admin/documentation/current", "evidence": "Admin API for site-wide/security operations, same base and OAuth 2.0 auth as the Automation API. The engagement 'Events API' here is a pull reporting method set, not event delivery." }
+      ]
+    },
+    {
+      "name": "SCIM 2.0 API",
+      "technology": "REST following the SCIM 2.0 standard, bearer token",
+      "channel": "Programmatic",
+      "classification_rationale": "The consumer invokes standardized SCIM operations over a distinct resource model to provision and deprovision users and groups from identity providers. Distinct standard and resource namespace from the general REST API; both Programmatic.",
+      "provenance": [
+        { "url": "https://quip.com/dev/admin/documentation/current", "evidence": "Developer portal lists the SCIM API for automated user/group provisioning from identity providers." }
+      ]
+    },
+    {
+      "name": "Realtime WebSocket",
+      "technology": "WebSocket",
+      "channel": "Event",
+      "classification_rationale": "After obtaining the socket URL, the service initiates delivery and pushes messages and updates to the consumer-controlled connection as events occur. The primitive is pushed event notification rather than request/response.",
+      "provenance": [
+        { "url": "https://quip.com/dev/automation/documentation/current", "evidence": "Automation API reference lists a 'Realtime / New Websocket' method that returns a websocket for receiving real-time updates." },
+        { "url": "https://github.com/quip/quip-api/tree/master/samples/websocket", "evidence": "Official sample: opens a websocket and listens for real-time updates pushed from Quip." }
+      ]
+    }
+  ],
+  "access_mechanism_ledger": [
+    { "mechanism": "Web client", "disposition": "interface", "detail": "Quip application (Interactive)" },
+    { "mechanism": "Mac desktop client", "disposition": "interface", "detail": "Quip application (Interactive)" },
+    { "mechanism": "iOS mobile app", "disposition": "interface", "detail": "Quip application (Interactive)" },
+    { "mechanism": "Windows desktop app", "disposition": "excluded", "detail": "Retired on June 6, 2024" },
+    { "mechanism": "Android mobile app", "disposition": "excluded", "detail": "Retired on June 6, 2024" },
+    { "mechanism": "Terminal CLI/TUI", "disposition": "excluded", "detail": "No official first-party CLI or TUI; only sample scripts and a Python client library, which is an SDK" },
+    { "mechanism": "Automation API (REST)", "disposition": "interface", "detail": "Quip REST API (Programmatic)" },
+    { "mechanism": "Admin API (REST)", "disposition": "interface", "detail": "Quip REST API (same base, auth and invocation)" },
+    { "mechanism": "Events API (engagement reporting)", "disposition": "interface", "detail": "Quip REST API; pull query methods, not event delivery" },
+    { "mechanism": "SCIM 2.0 API", "disposition": "interface", "detail": "SCIM 2.0 API (Programmatic)" },
+    { "mechanism": "Realtime / New Websocket", "disposition": "interface", "detail": "Realtime WebSocket (Event)" },
+    { "mechanism": "Webhooks (inbound sample apps: GitHub, PagerDuty, etc.)", "disposition": "excluded", "detail": "Sample integrations built on the REST API to post into threads; no provider-defined outbound webhook interface" },
+    { "mechanism": "Live Apps API/SDK", "disposition": "excluded", "detail": "Client-side JavaScript framework/SDK for embedded apps, not a service access channel" },
+    { "mechanism": "Python client library and other SDKs", "disposition": "excluded", "detail": "SDK/client library" },
+    { "mechanism": "Integrations index (Salesforce, Slack, Google Workspace, Jira, Box, etc.)", "disposition": "excluded", "detail": "Third-party integrations, not provider-defined interfaces" },
+    { "mechanism": "OAuth 2.0 authentication endpoints", "disposition": "excluded", "detail": "Authentication mechanism, not an interface" }
+  ],
+  "channel_evidence": {
+    "Interactive": "observed",
+    "Agentic": "no_evidence_observed",
+    "Conversational": "no_evidence_observed",
+    "Event": "observed",
+    "Programmatic": "observed"
+  },
+  "number_of_interfaces": 4,
+  "multi_interface": true,
+  "number_of_channels": 3,
+  "multi_channel": true
+}

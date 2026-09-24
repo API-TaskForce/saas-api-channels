@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0",
+  "generator": {
+    "platform": "Claude",
+    "provider": "Anthropic",
+    "model": "claude-opus-4-8",
+    "skill": "saas-interface-channel-analyzer",
+    "skill_version": "1.0"
+  },
+  "generated_at": "2026-09-24T12:00:00Z",
+  "evidence_checked_at": "2026-09-24T12:00:00Z",
+  "saas": {
+    "name": "Trustmary"
+  },
+  "interfaces": [
+    {
+      "name": "Web management application",
+      "technology": "Authenticated web application (browser)",
+      "channel": "Interactive",
+      "classification_rationale": "Users operate a persistent, navigable representation of account state (surveys, reviews, widgets, reports, settings) by manipulating presented controls, which is Affordance Manipulation.",
+      "provenance": [
+        {
+          "url": "https://help.trustmary.com/en/article/api-authentication-developers-11uji38/",
+          "evidence": "Instructs users to navigate the app to Settings and the Developers tab to create API keys, evidencing a navigable management console."
+        },
+        {
+          "url": "https://trustmary.com/integrations/",
+          "evidence": "Describes managing collection, reviews, and social proof in one place through the Trustmary app."
+        }
+      ]
+    },
+    {
+      "name": "Respondent-facing survey and widget forms",
+      "technology": "Embedded/hosted JavaScript widgets and survey forms (browser)",
+      "channel": "Interactive",
+      "classification_rationale": "Respondents complete branded surveys and leave reviews by manipulating form affordances in a navigable, conditional flow. Public and unauthenticated, a genuinely different base and auth from the console, but the same Affordance Manipulation paradigm.",
+      "provenance": [
+        {
+          "url": "https://help.trustmary.com/en/article/protect-widget-forms-with-google-recaptcha-ysx7sq/",
+          "evidence": "Documents widget forms that record genuine user interactions/submissions, protected by reCAPTCHA."
+        },
+        {
+          "url": "https://help.trustmary.com/en/category/widgets-1sekyvc/",
+          "evidence": "Widgets category establishing embedded, respondent-facing form and display surfaces distributed via embed, URL, QR, email, and SMS."
+        }
+      ]
+    },
+    {
+      "name": "Integration REST API",
+      "technology": "HTTP/JSON REST API (api.trustmary.io/v1)",
+      "channel": "Programmatic",
+      "classification_rationale": "The consumer explicitly invokes provider-defined operations over contacts, reviews, surveys, review connections, and lists through structured JSON requests under one base and one API-key auth, which is Operation Invocation.",
+      "provenance": [
+        {
+          "url": "https://help.trustmary.com/en/article/api-authentication-developers-11uji38/",
+          "evidence": "Establishes API-key authentication and a testable endpoint at https://api.trustmary.io/v1/test."
+        },
+        {
+          "url": "https://help.trustmary.com/en/article/reviews-developers-1xp19l3/",
+          "evidence": "Defines API resource objects and operations (reviews) invoked via structured requests, part of the single REST surface."
+        }
+      ]
+    },
+    {
+      "name": "Survey answer webhooks",
+      "technology": "Outbound HTTP webhooks",
+      "channel": "Event",
+      "classification_rationale": "The service initiates the interaction on the survey-answer-completed event and delivers it to a consumer-controlled receiver endpoint, which is Event Notification rather than an ordinary API returning event data.",
+      "provenance": [
+        {
+          "url": "https://help.trustmary.com/en/article/survey-answer-webhooks-developers-1oq7d8y/",
+          "evidence": "Describes webhooks as a method of pushing events to the consumer's endpoint."
+        }
+      ]
+    }
+  ],
+  "access_mechanism_ledger": [
+    {
+      "mechanism": "Web app (first-party web surface)",
+      "disposition": "interface",
+      "detail": "Web management application"
+    },
+    {
+      "mechanism": "Embedded widgets / survey and feedback forms",
+      "disposition": "interface",
+      "detail": "Respondent-facing survey and widget forms"
+    },
+    {
+      "mechanism": "Integration API (api.trustmary.io/v1)",
+      "disposition": "interface",
+      "detail": "Integration REST API"
+    },
+    {
+      "mechanism": "Survey answer webhooks",
+      "disposition": "interface",
+      "detail": "Survey answer webhooks"
+    },
+    {
+      "mechanism": "Mobile client (first-party mobile surface)",
+      "disposition": "excluded",
+      "detail": "No native first-party app in official sources or app stores; third-party device-support claims reflect the responsive web app, not a native client."
+    },
+    {
+      "mechanism": "Desktop client (first-party desktop surface)",
+      "disposition": "excluded",
+      "detail": "No native desktop client documented."
+    },
+    {
+      "mechanism": "CLI (first-party terminal surface)",
+      "disposition": "excluded",
+      "detail": "No command-line interface documented."
+    },
+    {
+      "mechanism": "TUI",
+      "disposition": "excluded",
+      "detail": "No CLI exists, so no navigable terminal interface."
+    },
+    {
+      "mechanism": "Conversational / in-product AI assistant",
+      "disposition": "excluded",
+      "detail": "AI analyses is internal analytics and the AI-optimised profile is content read by external AI; neither is a provider-defined NL access interface. Help Center chat is third-party support (Crisp)."
+    },
+    {
+      "mechanism": "MCP / agent protocol",
+      "disposition": "excluded",
+      "detail": "No agent-protocol or capability-discovery interface documented."
+    },
+    {
+      "mechanism": "Zapier / Make / native integrations",
+      "disposition": "excluded",
+      "detail": "Third-party integrations built on the REST API and webhooks, not separate provider-defined interfaces."
+    },
+    {
+      "mechanism": "Email / SMS / QR / URL survey distribution",
+      "disposition": "excluded",
+      "detail": "Outbound distribution mechanisms; the resulting respondent interaction is the survey-forms interface already counted."
+    },
+    {
+      "mechanism": "SDKs / client libraries",
+      "disposition": "excluded",
+      "detail": "Not counted as interfaces per rule; none prominently documented."
+    }
+  ],
+  "channel_evidence": {
+    "Interactive": "observed",
+    "Agentic": "no_evidence_observed",
+    "Conversational": "no_evidence_observed",
+    "Event": "observed",
+    "Programmatic": "observed"
+  },
+  "number_of_interfaces": 4,
+  "multi_interface": true,
+  "number_of_channels": 3,
+  "multi_channel": true
+}

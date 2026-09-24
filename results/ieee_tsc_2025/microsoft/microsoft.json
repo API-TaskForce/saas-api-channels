@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0",
+  "generator": {
+    "platform": "Claude",
+    "provider": "Anthropic",
+    "model": "claude-opus-4-8",
+    "skill": "saas-interface-channel-analyzer",
+    "skill_version": "1.0"
+  },
+  "generated_at": "2026-09-24T12:00:00Z",
+  "evidence_checked_at": "2026-09-24T12:00:00Z",
+  "saas": { "name": "Microsoft 365" },
+  "interfaces": [
+    {
+      "name": "Microsoft 365 web client",
+      "technology": "Web apps at m365.cloud.microsoft / office.com",
+      "channel": "Interactive",
+      "classification_rationale": "Actions are expressed by manipulating views, menus and forms of a navigable representation of documents and mailboxes (Affordance Manipulation).",
+      "provenance": [
+        { "url": "https://www.microsoft.com/en-us/microsoft-365/free-office-online-for-the-web", "evidence": "First-party web versions of Word, Excel, PowerPoint, Outlook, OneDrive." }
+      ]
+    },
+    {
+      "name": "Microsoft 365 desktop client",
+      "technology": "Windows and macOS desktop apps (Click-to-Run)",
+      "channel": "Interactive",
+      "classification_rationale": "First-party desktop apps whose actions are affordance manipulation of a navigable UI; distinct client surface, same Interactive paradigm.",
+      "provenance": [
+        { "url": "https://learn.microsoft.com/en-us/office365/servicedescriptions/office-applications-service-description/office-applications-service-description", "evidence": "Office desktop apps installed on Windows and Mac via Click-to-Run." }
+      ]
+    },
+    {
+      "name": "Microsoft 365 mobile client",
+      "technology": "iOS and Android apps",
+      "channel": "Interactive",
+      "classification_rationale": "First-party mobile apps; Affordance Manipulation on a distinct mobile surface.",
+      "provenance": [
+        { "url": "https://support.microsoft.com/en-us/office/foundations-experiences/microsoft-365-mobile-apps", "evidence": "iOS and Android versions of Word, Excel, PowerPoint, OneDrive, Outlook." }
+      ]
+    },
+    {
+      "name": "Microsoft Graph REST API",
+      "technology": "REST/OData over HTTPS (graph.microsoft.com v1.0 and beta)",
+      "channel": "Programmatic",
+      "classification_rationale": "Consumer explicitly invokes provider-defined operations against resources via structured HTTP requests (Operation Invocation).",
+      "provenance": [
+        { "url": "https://learn.microsoft.com/en-us/graph/use-the-api", "evidence": "Structured {HTTP method} https://graph.microsoft.com/{version}/{resource} request pattern over M365 data." },
+        { "url": "https://learn.microsoft.com/en-us/graph/overview", "evidence": "Microsoft Graph is the unified REST API for Microsoft 365 services." }
+      ]
+    },
+    {
+      "name": "Exchange Online administrative PowerShell",
+      "technology": "PowerShell cmdlets via ExchangeOnlineManagement module",
+      "channel": "Programmatic",
+      "classification_rationale": "Explicit command invocation through cmdlets over a distinct Exchange endpoint and auth, separate primitive from Graph REST.",
+      "provenance": [
+        { "url": "https://learn.microsoft.com/en-us/powershell/exchange/connect-to-exchange-online-powershell?view=exchange-ps", "evidence": "First-party command-line cmdlet interface with its own REST-backed connection to Exchange Online." }
+      ]
+    },
+    {
+      "name": "Internet mail protocols (SMTP submission, IMAP, POP)",
+      "technology": "Authenticated SMTP, IMAP4, POP3 with OAuth 2.0",
+      "channel": "Programmatic",
+      "classification_rationale": "Structured protocol operations to send and retrieve mail against provider-defined Exchange Online endpoints (Operation Invocation).",
+      "provenance": [
+        { "url": "https://learn.microsoft.com/en-us/exchange/clients-and-mobile-in-exchange-online/authenticated-client-smtp-submission", "evidence": "Authenticated SMTP client submission for Office 365 / Microsoft 365 mailboxes." },
+        { "url": "https://learn.microsoft.com/en-us/exchange/client-developer/legacy-protocols/how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth", "evidence": "OAuth support for IMAP, POP and SMTP for Microsoft 365 users." }
+      ]
+    },
+    {
+      "name": "Microsoft Graph change notifications",
+      "technology": "Subscriptions delivered via webhooks, Azure Event Hubs, or Azure Event Grid",
+      "channel": "Event",
+      "classification_rationale": "The service initiates delivery to a consumer-controlled receiver when a subscribed resource changes (Event Notification), not consumer-invoked.",
+      "provenance": [
+        { "url": "https://learn.microsoft.com/en-us/graph/change-notifications-overview", "evidence": "Applications subscribe and receive service-initiated notifications via webhooks, Event Hubs, or Event Grid." },
+        { "url": "https://learn.microsoft.com/en-us/graph/change-notifications-delivery-webhooks", "evidence": "Graph POSTs change notifications to the consumer's notificationUrl endpoint." }
+      ]
+    },
+    {
+      "name": "Microsoft 365 Copilot",
+      "technology": "In-app and standalone natural-language assistant",
+      "channel": "Conversational",
+      "classification_rationale": "The consumer expresses intent through natural-language messages; tool, plugin and MCP orchestration is internal to the service (Contextual Conversation), matching the assistant-with-internal-tools boundary case.",
+      "provenance": [
+        { "url": "https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-api-plugins", "evidence": "Declarative agents let users ask in natural language; Copilot reasons over and invokes tools internally." },
+        { "url": "https://www.microsoft.com/en-us/microsoft-365", "evidence": "Copilot presented as an AI assistant across the Microsoft 365 apps." }
+      ]
+    },
+    {
+      "name": "Microsoft MCP Server for Enterprise",
+      "technology": "First-party MCP endpoint (mcp.svc.cloud.microsoft/enterprise), preview",
+      "channel": "Agentic",
+      "classification_rationale": "Exposes semantically described Graph tools that agents discover and select via tools/list and tools/call as part of the interaction contract (Capability Discovery and Invocation), the MCP boundary case for Agentic rather than Programmatic.",
+      "provenance": [
+        { "url": "https://learn.microsoft.com/en-us/graph/mcp-server/overview", "evidence": "First-party MCP endpoint exposing microsoft_graph_suggest_queries, microsoft_graph_get, microsoft_graph_list_properties for agent discovery and invocation. Preview; currently Entra identity read-only over Graph." }
+      ]
+    }
+  ],
+  "access_mechanism_ledger": [
+    { "mechanism": "Web app (office.com / m365.cloud.microsoft)", "disposition": "interface", "detail": "Microsoft 365 web client (Interactive)" },
+    { "mechanism": "Desktop app (Windows/macOS Click-to-Run)", "disposition": "interface", "detail": "Microsoft 365 desktop client (Interactive)" },
+    { "mechanism": "Mobile app (iOS/Android)", "disposition": "interface", "detail": "Microsoft 365 mobile client (Interactive)" },
+    { "mechanism": "Terminal / TUI surface", "disposition": "excluded", "detail": "No first-party persistent navigable TUI; terminal access is command-based only (already classified as Programmatic)." },
+    { "mechanism": "API / API reference (Microsoft Graph)", "disposition": "interface", "detail": "Microsoft Graph REST API (Programmatic)" },
+    { "mechanism": "CLI (Exchange Online and M365 admin PowerShell)", "disposition": "interface", "detail": "Exchange Online administrative PowerShell (Programmatic); Teams and SharePoint Online Management Shell share the cmdlet paradigm within this family." },
+    { "mechanism": "SMTP / IMAP / POP", "disposition": "interface", "detail": "Internet mail protocols (Programmatic)" },
+    { "mechanism": "Webhooks / change notifications", "disposition": "interface", "detail": "Microsoft Graph change notifications (Event)" },
+    { "mechanism": "Conversational / AI assistant", "disposition": "interface", "detail": "Microsoft 365 Copilot (Conversational)" },
+    { "mechanism": "MCP / agent / protocol", "disposition": "interface", "detail": "Microsoft MCP Server for Enterprise (Agentic)" },
+    { "mechanism": "Microsoft Graph SDKs and Graph PowerShell SDK", "disposition": "excluded", "detail": "SDKs/client libraries and a wrapper over Graph REST; barred by the do-not-count rule." },
+    { "mechanism": "Microsoft Graph CLI (mgc)", "disposition": "excluded", "detail": "First-party but a thin command wrapper over the Graph REST API, not a distinct contract." },
+    { "mechanism": "CLI for Microsoft 365 (m365)", "disposition": "excluded", "detail": "Community/open-source project, not a provider-defined Microsoft interface." },
+    { "mechanism": "Graph Explorer", "disposition": "excluded", "detail": "First-party developer testing tool that issues Graph API requests; operations belong to the Graph REST API." },
+    { "mechanism": "Third-party integrations index / Graph connectors", "disposition": "excluded", "detail": "External integrations and data ingestion, not first-party access interfaces to the service." }
+  ],
+  "channel_evidence": {
+    "Interactive": "observed",
+    "Agentic": "observed",
+    "Conversational": "observed",
+    "Event": "observed",
+    "Programmatic": "observed"
+  },
+  "number_of_interfaces": 9,
+  "multi_interface": true,
+  "number_of_channels": 5,
+  "multi_channel": true
+}

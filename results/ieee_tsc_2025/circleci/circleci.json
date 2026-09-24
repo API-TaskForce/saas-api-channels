@@ -1,0 +1,238 @@
+{
+  "schema_version": "1.0",
+  "generator": {
+    "platform": "Claude",
+    "provider": "Anthropic",
+    "model": "UNKNOWN",
+    "skill": "saas-interface-channel-analyzer",
+    "skill_version": "1.0"
+  },
+  "generated_at": "2026-09-24T00:00:00Z",
+  "evidence_checked_at": "2026-09-24T00:00:00Z",
+  "saas": {
+    "name": "CircleCI"
+  },
+  "interfaces": [
+    {
+      "name": "Web application",
+      "technology": "Web UI (app.circleci.com)",
+      "channel": "Interactive",
+      "classification_rationale": "Users act on a persistent, navigable representation of pipelines, jobs and settings by manipulating views, menus, buttons and forms, which is Affordance Manipulation.",
+      "provenance": [
+        {
+          "url": "https://circleci.com/docs/guides/about-circleci/introduction-to-the-circleci-web-app/",
+          "evidence": "Official overview of the CircleCI web application and its navigable pipeline, workflow and settings views."
+        }
+      ]
+    },
+    {
+      "name": "VS Code extension (Pipeline Manager)",
+      "technology": "IDE extension panel",
+      "channel": "Interactive",
+      "classification_rationale": "A first-party editor client renders a persistent pipelines panel and status bar whose tree items, hover actions and controls the user manipulates to view and act on runs.",
+      "provenance": [
+        {
+          "url": "https://circleci.com/docs/guides/toolkit/vs-code-extension-overview/",
+          "evidence": "Documents the Pipeline Manager panel, status bar and per-item actions (rerun, cancel, approve, SSH) inside VS Code."
+        }
+      ]
+    },
+    {
+      "name": "REST API v2",
+      "technology": "HTTP REST API",
+      "channel": "Programmatic",
+      "classification_rationale": "The consumer explicitly invokes provider-defined operations over one base and token auth, with no capability discovery in the contract, which is Operation Invocation.",
+      "provenance": [
+        {
+          "url": "https://circleci.com/docs/api/v2/index.html",
+          "evidence": "Official API v2 reference describing resources and operations for pipelines, workflows, jobs, contexts, webhooks and more."
+        }
+      ]
+    },
+    {
+      "name": "CircleCI CLI (command interface)",
+      "technology": "Command-line binary",
+      "channel": "Programmatic",
+      "classification_rationale": "Commands invoke defined operations and a direct api passthrough. It exposes commands and prompts but no persistent navigable dashboard, so it is Operation Invocation, not Interactive.",
+      "provenance": [
+        {
+          "url": "https://circleci.com/docs/guides/toolkit/circleci-cli/",
+          "evidence": "Official CLI documentation; the CLI is documented to run correctly in non-TTY contexts and exposes command groups such as run, config, orb, context and policy."
+        }
+      ]
+    },
+    {
+      "name": "Custom webhook triggers (inbound)",
+      "technology": "Inbound webhook endpoint",
+      "channel": "Programmatic",
+      "classification_rationale": "An external caller triggers a pipeline by POSTing a structured request with a secret to a distinct trigger endpoint. The consumer initiates and invokes an operation, which is Operation Invocation, not service-initiated Event.",
+      "provenance": [
+        {
+          "url": "https://circleci.com/docs/guides/orchestrate/custom-webhooks/",
+          "evidence": "Describes inbound custom webhooks that let any service trigger a pipeline via a POST to a trigger URL with a secret."
+        }
+      ]
+    },
+    {
+      "name": "Outbound webhooks",
+      "technology": "Outbound webhook delivery",
+      "channel": "Event",
+      "classification_rationale": "CircleCI initiates an HTTP POST to a consumer-registered receiver when subscribed pipeline, workflow or job events occur, which is Event Notification.",
+      "provenance": [
+        {
+          "url": "https://circleci.com/docs/guides/integration/outbound-webhooks/",
+          "evidence": "Documents service-initiated webhook delivery to a registered receiver URL on platform events."
+        }
+      ]
+    },
+    {
+      "name": "Hosted MCP server",
+      "technology": "Model Context Protocol (hosted)",
+      "channel": "Agentic",
+      "classification_rationale": "A hosted MCP server exposes semantically described CI tools that an assistant discovers and selects by goal; capability discovery and selection structure the contract, the MCP boundary case resolving to Agentic.",
+      "provenance": [
+        {
+          "url": "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+          "evidence": "Describes the hosted MCP server at mcp.circleci.com/v1/mcp with a curated tool set an assistant selects from."
+        }
+      ]
+    },
+    {
+      "name": "CircleCI CLI MCP",
+      "technology": "Model Context Protocol (local, via CLI)",
+      "channel": "Agentic",
+      "classification_rationale": "A local MCP server built into the CLI exposes the full CLI as discoverable MCP tools under the local CLI session, a distinct capability-discovery contract on the same technology as the CLI.",
+      "provenance": [
+        {
+          "url": "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+          "evidence": "Documents the CLI MCP, built into the CircleCI CLI, exposing the entire CLI as tools to AI assistants."
+        }
+      ]
+    },
+    {
+      "name": "Docs MCP server",
+      "technology": "Model Context Protocol (docs)",
+      "channel": "Agentic",
+      "classification_rationale": "A provider-defined MCP server exposes documentation-retrieval tools an assistant discovers and calls; Agentic in paradigm, scoped to documentation.",
+      "provenance": [
+        {
+          "url": "https://circleci.com/docs/guides/toolkit/connecting-to-a-docs-mcp-server/",
+          "evidence": "Official page for connecting to the CircleCI Docs MCP server."
+        }
+      ]
+    }
+  ],
+  "access_mechanism_ledger": [
+    {
+      "mechanism": "Web application",
+      "disposition": "interface",
+      "detail": "Web application (Interactive)"
+    },
+    {
+      "mechanism": "VS Code extension",
+      "disposition": "interface",
+      "detail": "VS Code extension Pipeline Manager (Interactive)"
+    },
+    {
+      "mechanism": "REST API v2",
+      "disposition": "interface",
+      "detail": "REST API v2 (Programmatic)"
+    },
+    {
+      "mechanism": "CircleCI CLI (commands)",
+      "disposition": "interface",
+      "detail": "CircleCI CLI command interface (Programmatic)"
+    },
+    {
+      "mechanism": "CLI TUI dashboard",
+      "disposition": "excluded",
+      "detail": "No persistent navigable TUI documented; the CLI exposes commands and prompts only"
+    },
+    {
+      "mechanism": "Custom webhooks (inbound)",
+      "disposition": "interface",
+      "detail": "Custom webhook triggers (Programmatic)"
+    },
+    {
+      "mechanism": "Outbound webhooks",
+      "disposition": "interface",
+      "detail": "Outbound webhooks (Event)"
+    },
+    {
+      "mechanism": "Hosted MCP server",
+      "disposition": "interface",
+      "detail": "Hosted MCP server (Agentic)"
+    },
+    {
+      "mechanism": "CLI MCP",
+      "disposition": "interface",
+      "detail": "CircleCI CLI MCP (Agentic)"
+    },
+    {
+      "mechanism": "Docs MCP server",
+      "disposition": "interface",
+      "detail": "Docs MCP server (Agentic)"
+    },
+    {
+      "mechanism": "Mobile app",
+      "disposition": "excluded",
+      "detail": "No first-party mobile client; mobile material concerns building customer apps as CI targets"
+    },
+    {
+      "mechanism": "Desktop app",
+      "disposition": "excluded",
+      "detail": "No first-party desktop client; CircleCI Server is self-hosted backend infrastructure"
+    },
+    {
+      "mechanism": "Environment CLI",
+      "disposition": "excluded",
+      "detail": "Legacy in-job test-splitting utility; command-based Programmatic paradigm, adds no new channel"
+    },
+    {
+      "mechanism": "Chunk CLI",
+      "disposition": "excluded",
+      "detail": "Beta specialized command-line tool; command-based Programmatic paradigm, adds no new channel"
+    },
+    {
+      "mechanism": "In-app AI features / Intelligent summaries",
+      "disposition": "excluded",
+      "detail": "AI augmentation inside the web app, not a standalone access interface"
+    },
+    {
+      "mechanism": "Docs Ask AI widget",
+      "disposition": "excluded",
+      "detail": "Documentation-site Q&A helper; its MCP form is captured as the Docs MCP"
+    },
+    {
+      "mechanism": "CircleCI Agent Skills",
+      "disposition": "excluded",
+      "detail": "Agent skill definitions and guidance, not an access interface"
+    },
+    {
+      "mechanism": "Config SDK / Orb development kit / YAML language server",
+      "disposition": "excluded",
+      "detail": "SDKs, dev kits and libraries, not interfaces"
+    },
+    {
+      "mechanism": "Third-party integrations (Slack, Jira, Datadog, New Relic, Sumo Logic, OpenTelemetry)",
+      "disposition": "excluded",
+      "detail": "Third-party integrations, not provider-defined interfaces"
+    },
+    {
+      "mechanism": "Public GraphQL API",
+      "disposition": "excluded",
+      "detail": "None observed; the public API surface is REST (API v2)"
+    }
+  ],
+  "channel_evidence": {
+    "Interactive": "observed",
+    "Agentic": "observed",
+    "Conversational": "no_evidence_observed",
+    "Event": "observed",
+    "Programmatic": "observed"
+  },
+  "number_of_interfaces": 9,
+  "multi_interface": true,
+  "number_of_channels": 4,
+  "multi_channel": true
+}

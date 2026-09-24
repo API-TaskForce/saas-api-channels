@@ -1,0 +1,301 @@
+{
+  "schema_version": "1.0",
+  "generator": {
+    "platform": "Claude",
+    "provider": "Anthropic",
+    "model": "claude-opus-4-8",
+    "skill": "saas-interface-channel-analyzer",
+    "skill_version": "1.0"
+  },
+  "generated_at": "2026-09-23T12:00:00Z",
+  "evidence_checked_at": "2026-09-23T12:00:00Z",
+  "saas": {
+    "name": "Shopify"
+  },
+  "interfaces": [
+    {
+      "name": "Shopify admin (web and mobile app)",
+      "technology": "Web application and native iOS/Android app",
+      "channel": "Interactive",
+      "classification_rationale": "Actions are expressed by manipulating presented views, controls and forms of a persistent, navigable representation of store state (Affordance Manipulation). Delivered on both web and the first-party mobile app under the same primitive, state and authentication.",
+      "provenance": [
+        {
+          "url": "https://help.shopify.com/en/manual/shopify-admin",
+          "evidence": "Admin is the back office accessed on desktop via browser and on mobile via the first-party Shopify app to manage orders, products and analytics."
+        },
+        {
+          "url": "https://help.shopify.com/en/manual/shopify-admin/shopify-app",
+          "evidence": "First-party iOS/Android app to run the store: view performance, manage orders, update catalog, capture payments."
+        }
+      ]
+    },
+    {
+      "name": "Shopify POS",
+      "technology": "Native iOS/Android point-of-sale app",
+      "channel": "Interactive",
+      "classification_rationale": "In-person retail selling through affordances presented in the POS app (register, cart, tender, inventory); a distinct interaction contract manipulated by the operator.",
+      "provenance": [
+        {
+          "url": "https://www.shopify.com/pos",
+          "evidence": "First-party POS app installed on a smartphone or tablet for in-person sales, synced with the store back office."
+        },
+        {
+          "url": "https://help.shopify.com/en/manual/sell-in-person",
+          "evidence": "Shopify POS available on iOS and Android; syncs orders and inventory across retail locations and the online store."
+        }
+      ]
+    },
+    {
+      "name": "Admin GraphQL API",
+      "technology": "GraphQL over HTTPS",
+      "channel": "Programmatic",
+      "classification_rationale": "Consumer explicitly issues GraphQL queries and mutations against a provider-defined endpoint with an access token (Operation Invocation).",
+      "provenance": [
+        {
+          "url": "https://shopify.dev/docs/api/admin-graphql",
+          "evidence": "GraphQL Admin API at admin/api/{version}/graphql.json for products, customers, orders, inventory; recommended API for new apps."
+        }
+      ]
+    },
+    {
+      "name": "Admin REST API",
+      "technology": "REST over HTTPS",
+      "channel": "Programmatic",
+      "classification_rationale": "Consumer explicitly invokes resource endpoints (Operation Invocation). Separate interface from the GraphQL Admin API because the invocation style differs.",
+      "provenance": [
+        {
+          "url": "https://shopify.dev/docs/api/admin-rest",
+          "evidence": "Resource endpoints admin/api/{version}/{resource}.json; legacy as of Oct 1 2024, GraphQL required for new public apps from Apr 1 2025."
+        }
+      ]
+    },
+    {
+      "name": "Storefront API",
+      "technology": "GraphQL over HTTPS",
+      "channel": "Programmatic",
+      "classification_rationale": "Consumer explicitly issues GraphQL operations against a single POST endpoint with a storefront token (Operation Invocation). Distinct base and auth from the Admin API.",
+      "provenance": [
+        {
+          "url": "https://shopify.dev/docs/api/storefront",
+          "evidence": "Single GraphQL endpoint /{version}/graphql.json (POST only); no REST equivalent for storefronts."
+        }
+      ]
+    },
+    {
+      "name": "Partner API",
+      "technology": "GraphQL over HTTPS",
+      "channel": "Programmatic",
+      "classification_rationale": "Consumer explicitly invokes GraphQL operations against Partner Dashboard data with partner authentication (Operation Invocation). Distinct base and auth from the Admin and Storefront APIs.",
+      "provenance": [
+        {
+          "url": "https://shopify.dev/docs/api/partner",
+          "evidence": "Partner API exposes Partner Dashboard data to automate front and back-office operations."
+        }
+      ]
+    },
+    {
+      "name": "Shopify CLI",
+      "technology": "Command-line interface",
+      "channel": "Programmatic",
+      "classification_rationale": "Consumer invokes provider-defined commands to scaffold, deploy and run apps and themes (Operation Invocation). Interactive prompts collect parameters for the invoked command and are not a persistent navigable TUI.",
+      "provenance": [
+        {
+          "url": "https://shopify.dev/docs/api/shopify-cli",
+          "evidence": "Command-line tool (shopify app/theme commands) to build apps, themes and Hydrogen storefronts and automate development tasks."
+        }
+      ]
+    },
+    {
+      "name": "Webhooks / Events",
+      "technology": "Service-initiated HTTPS delivery to a consumer receiver (URL, EventBridge, Pub/Sub)",
+      "channel": "Event",
+      "classification_rationale": "On a subscribed topic event, the service initiates the interaction and delivers a payload to a consumer-controlled receiver (Event Notification).",
+      "provenance": [
+        {
+          "url": "https://shopify.dev/docs/apps/build/webhooks/subscribe",
+          "evidence": "A webhook subscription describes a topic and a destination; Shopify sends a payload to the destination when the event occurs."
+        },
+        {
+          "url": "https://shopify.dev/docs/apps/build/events",
+          "evidence": "Events is the next-generation subscription mechanism in developer preview; same subscribe-and-deliver workflow as webhooks."
+        }
+      ]
+    },
+    {
+      "name": "Sidekick",
+      "technology": "Embedded AI commerce assistant",
+      "channel": "Conversational",
+      "classification_rationale": "Consumer interacts through natural-language messages (text, voice, screen share); the assistant plans and executes and surfaces changes for review. The primitive is the message and internal tool orchestration is not part of the consumer-facing contract (Contextual Conversation).",
+      "provenance": [
+        {
+          "url": "https://help.shopify.com/en/manual/shopify-admin/productivity-tools/sidekick",
+          "evidence": "AI-enabled commerce assistant in the admin; chat by text or voice from any page to get guidance and complete tasks, presented for review before applying."
+        }
+      ]
+    },
+    {
+      "name": "Storefront MCP",
+      "technology": "Per-store Model Context Protocol server",
+      "channel": "Agentic",
+      "classification_rationale": "Per-store MCP endpoint exposes discoverable tools (catalog search, cart, policies) that an agent lists and selects; discovery and selection are part of the interaction contract (Capability Discovery and Invocation). MCP boundary case resolved as Agentic.",
+      "provenance": [
+        {
+          "url": "https://shopify.dev/docs/apps/build/storefront-mcp",
+          "evidence": "Per-store endpoint https://{shop}.myshopify.com/api/mcp exposing structured tools for search, cart and orders that an AI agent connects to and selects."
+        }
+      ]
+    },
+    {
+      "name": "Catalog MCP (Global)",
+      "technology": "Cross-merchant Model Context Protocol server",
+      "channel": "Agentic",
+      "classification_rationale": "Cross-merchant discovery MCP whose tools (search_global_products and similar) an agent discovers and selects; distinct base and JWT auth from the Storefront MCP (Capability Discovery and Invocation).",
+      "provenance": [
+        {
+          "url": "https://shopify.dev/docs/agents/catalog/mcp",
+          "evidence": "Catalog MCP provides search across all Shopify products with authentication via JWT tokens, as the primary discovery toolkit for agentic commerce."
+        }
+      ]
+    },
+    {
+      "name": "Shopify Dev MCP",
+      "technology": "Model Context Protocol server for docs and schema",
+      "channel": "Agentic",
+      "classification_rationale": "Official MCP server exposing tools (search docs, introspect Admin GraphQL schema, validate GraphQL) that a client discovers and selects (Capability Discovery and Invocation).",
+      "provenance": [
+        {
+          "url": "https://www.npmjs.com/package/@shopify/dev-mcp",
+          "evidence": "Official @shopify/dev-mcp server provides tools such as search_dev_docs and introspect_admin_schema for AI clients."
+        }
+      ]
+    }
+  ],
+  "access_mechanism_ledger": [
+    {
+      "mechanism": "Shopify admin (web)",
+      "disposition": "interface",
+      "detail": "Shopify admin (web and mobile app)"
+    },
+    {
+      "mechanism": "Merchant mobile app (iOS/Android)",
+      "disposition": "interface",
+      "detail": "Shopify admin (web and mobile app) — mobile surface"
+    },
+    {
+      "mechanism": "Desktop client",
+      "disposition": "excluded",
+      "detail": "No dedicated first-party desktop app; admin is browser-based"
+    },
+    {
+      "mechanism": "Terminal / Shopify CLI",
+      "disposition": "interface",
+      "detail": "Shopify CLI; no persistent navigable TUI"
+    },
+    {
+      "mechanism": "Shopify POS",
+      "disposition": "interface",
+      "detail": "Shopify POS"
+    },
+    {
+      "mechanism": "Online Store hosted storefront",
+      "disposition": "excluded",
+      "detail": "Merchant-configured buyer-facing commerce output, not a provider interface for operating the service; programmatic buyer access covered by Storefront API"
+    },
+    {
+      "mechanism": "Shop consumer app",
+      "disposition": "excluded",
+      "detail": "Cross-merchant consumer discovery/checkout app; buyer marketplace layer, not an interface into a single merchant's service"
+    },
+    {
+      "mechanism": "Admin GraphQL API",
+      "disposition": "interface",
+      "detail": "Admin GraphQL API"
+    },
+    {
+      "mechanism": "Admin REST API",
+      "disposition": "interface",
+      "detail": "Admin REST API (legacy)"
+    },
+    {
+      "mechanism": "Storefront API",
+      "disposition": "interface",
+      "detail": "Storefront API"
+    },
+    {
+      "mechanism": "Partner API",
+      "disposition": "interface",
+      "detail": "Partner API"
+    },
+    {
+      "mechanism": "Webhooks / Events",
+      "disposition": "interface",
+      "detail": "Webhooks / Events"
+    },
+    {
+      "mechanism": "Sidekick AI assistant",
+      "disposition": "interface",
+      "detail": "Sidekick"
+    },
+    {
+      "mechanism": "Storefront MCP",
+      "disposition": "interface",
+      "detail": "Storefront MCP"
+    },
+    {
+      "mechanism": "Catalog MCP (Global)",
+      "disposition": "interface",
+      "detail": "Catalog MCP (Global)"
+    },
+    {
+      "mechanism": "Shopify Dev MCP",
+      "disposition": "interface",
+      "detail": "Shopify Dev MCP"
+    },
+    {
+      "mechanism": "Shopify Functions",
+      "disposition": "excluded",
+      "detail": "Backend extension mechanism, not a consumer-facing access interface"
+    },
+    {
+      "mechanism": "App extensions / UI extensions",
+      "disposition": "excluded",
+      "detail": "Render app UI inside existing Shopify surfaces; extend Interactive interfaces rather than constitute a new one"
+    },
+    {
+      "mechanism": "Shopify Flow",
+      "disposition": "excluded",
+      "detail": "Automation product configured within the admin, not a distinct external access channel"
+    },
+    {
+      "mechanism": "Liquid / themes",
+      "disposition": "excluded",
+      "detail": "Templating layer for the storefront, not an access interface"
+    },
+    {
+      "mechanism": "GraphiQL / API explorer",
+      "disposition": "excluded",
+      "detail": "Developer utility for composing and running API calls; supports the GraphQL APIs"
+    },
+    {
+      "mechanism": "Customer Account API / Customer Account MCP",
+      "disposition": "excluded",
+      "detail": "Additional customer-account surfaces (Programmatic / Agentic); channels already Observed, not separately enumerated"
+    },
+    {
+      "mechanism": "Checkout MCP",
+      "disposition": "excluded",
+      "detail": "Preview for select partners; emerging Agentic surface, channel already Observed"
+    }
+  ],
+  "channel_evidence": {
+    "Interactive": "observed",
+    "Agentic": "observed",
+    "Conversational": "observed",
+    "Event": "observed",
+    "Programmatic": "observed"
+  },
+  "number_of_interfaces": 12,
+  "multi_interface": true,
+  "number_of_channels": 5,
+  "multi_channel": true
+}

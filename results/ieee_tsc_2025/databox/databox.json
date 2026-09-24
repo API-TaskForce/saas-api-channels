@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.0",
+  "generator": {
+    "platform": "Claude",
+    "provider": "Anthropic",
+    "model": "claude-opus-4-8",
+    "skill": "saas-interface-channel-analyzer",
+    "skill_version": "1.0"
+  },
+  "generated_at": "2026-09-24T12:00:00Z",
+  "evidence_checked_at": "2026-09-24T12:00:00Z",
+  "saas": {
+    "name": "Databox"
+  },
+  "interfaces": [
+    {
+      "name": "Web application (Databoards / Dashboard Designer)",
+      "technology": "Browser-based web app",
+      "channel": "Interactive",
+      "classification_rationale": "Actions are expressed by manipulating presented affordances (drag-and-drop Designer, navigable dashboards, menus, filters) of a persistent representation of account state. The primitive is affordance manipulation.",
+      "provenance": [
+        {
+          "url": "https://databox.com/product/designer",
+          "evidence": "Official product page describing the drag-and-drop Dashboard Designer used to build and edit navigable dashboards."
+        },
+        {
+          "url": "https://databox.com/data-visualization",
+          "evidence": "States the Designer runs from the browser with no downloads and dashboards are fully interactive/responsive across desktop, mobile, TV."
+        }
+      ]
+    },
+    {
+      "name": "Mobile app (iOS / Android, incl. Apple Watch)",
+      "technology": "Native mobile client",
+      "channel": "Interactive",
+      "classification_rationale": "A first-party native client on the mobile surface where the user manipulates on-screen affordances (dashboards, favorites, Insights/Pulse, drag-to-reorder) of service state. Same paradigm as web but a distinct provider-shipped client surface.",
+      "provenance": [
+        {
+          "url": "https://help.databox.com/overview-mobile-app",
+          "evidence": "Official help doc detailing navigation of Databoards, Metrics, Goals, Notifications pages and reordering within the app."
+        },
+        {
+          "url": "https://databox.com/product/mobile",
+          "evidence": "Official page confirming first-party iOS and Android apps for viewing, editing, and annotating dashboards on device."
+        }
+      ]
+    },
+    {
+      "name": "Genie AI Analyst (in-app Agentic Analytics chat)",
+      "technology": "In-product natural-language assistant",
+      "channel": "Conversational",
+      "classification_rationale": "The consumer interacts through plain-language messages that the service interprets; the AI formulates queries that an internal engine executes and then summarizes. Tool orchestration is internal to the service, so the primitive is the message (Conversational, not Agentic).",
+      "provenance": [
+        {
+          "url": "https://help.databox.com/get-started-with-genie-the-databox-ai-assistant",
+          "evidence": "Official help doc: Genie is reached via Data > Agentic Analytics > New chat; user enters prompts and Genie responds in the prompt's language."
+        },
+        {
+          "url": "https://databox.com/ai-analyst",
+          "evidence": "Official page describing Genie as an in-product AI Analyst answering plain-language performance questions from connected data."
+        }
+      ]
+    },
+    {
+      "name": "REST API (Push / Dataset API, v1)",
+      "technology": "REST/HTTP API",
+      "channel": "Programmatic",
+      "classification_rationale": "The consumer explicitly invokes provider-defined operations via resource-oriented URLs, JSON bodies, and standard HTTP verbs authenticated with an API key. The primitive is structured operation invocation.",
+      "provenance": [
+        {
+          "url": "https://developers.databox.com/docs/api/overview",
+          "evidence": "Official developer docs: REST conventions, resource-oriented URLs, JSON, standard HTTP verbs/status codes, versioned in the URL. Current."
+        },
+        {
+          "url": "https://help.databox.com/article/171-how-to-push-data-via-api-to-databox",
+          "evidence": "Official help article showing GET/POST calls to api.databox.com/v1 endpoints with x-api-key header."
+        }
+      ]
+    },
+    {
+      "name": "Databox MCP server",
+      "technology": "Model Context Protocol server (JSON-RPC over HTTP)",
+      "channel": "Agentic",
+      "classification_rationale": "Exposes semantically described tools (e.g. ingest_data, query_dataset_with_ai, current-datetime) that an AI client discovers and selects as part of the interaction contract, authorized via OAuth 2.0. Capability discovery/selection structures the contract, so it is Agentic rather than Programmatic.",
+      "provenance": [
+        {
+          "url": "https://developers.databox.com/docs/mcp/overview",
+          "evidence": "Official MCP docs: server at mcp.databox.com/mcp, JSON-RPC over HTTP, OAuth 2.0, tools such as ingest_data and query_dataset_with_ai. Marked as an evolving/beta feature."
+        },
+        {
+          "url": "https://github.com/databox/databox-mcp",
+          "evidence": "Databox-owned repository documenting the MCP server, its tool set, and three-layer query architecture for AI clients."
+        }
+      ]
+    }
+  ],
+  "access_mechanism_ledger": [
+    {
+      "mechanism": "API / API reference",
+      "disposition": "interface",
+      "detail": "REST API (Push / Dataset API, v1)"
+    },
+    {
+      "mechanism": "MCP / agent / protocol",
+      "disposition": "interface",
+      "detail": "Databox MCP server"
+    },
+    {
+      "mechanism": "Conversational / chat / AI assistant",
+      "disposition": "interface",
+      "detail": "Genie AI Analyst (in-app Agentic Analytics chat)"
+    },
+    {
+      "mechanism": "First-party web client",
+      "disposition": "interface",
+      "detail": "Web application (Databoards / Dashboard Designer)"
+    },
+    {
+      "mechanism": "First-party mobile client",
+      "disposition": "interface",
+      "detail": "Mobile app (iOS / Android, incl. Apple Watch)"
+    },
+    {
+      "mechanism": "First-party desktop client",
+      "disposition": "excluded",
+      "detail": "Excluded: the 'desktop app' / desktop Designer is the same browser-based web application on desktop (no download required); the Mac App Store listing is the iOS app on Apple Silicon, not a separate native desktop client."
+    },
+    {
+      "mechanism": "Terminal client / CLI / TUI",
+      "disposition": "excluded",
+      "detail": "Excluded: no first-party CLI or TUI found in official Databox documentation; Databox ships SDKs, not a command-line client."
+    },
+    {
+      "mechanism": "Webhooks / events / inbound routing",
+      "disposition": "excluded",
+      "detail": "Excluded: no official provider-defined outbound webhook/event interface delivering to a consumer-controlled receiver was found. Alerts and Scorecards are UI-configured notifications delivered to email, Slack, and mobile push, not a distinct event interface."
+    },
+    {
+      "mechanism": "SMTP / email relay",
+      "disposition": "excluded",
+      "detail": "Excluded: not offered by Databox as an inbound data-submission or access interface."
+    },
+    {
+      "mechanism": "SDKs / client libraries (Java, PHP, Ruby, Node.js, Go, Python)",
+      "disposition": "excluded",
+      "detail": "Excluded per counting rules: client libraries that wrap the REST API; they implement an interface rather than being one."
+    },
+    {
+      "mechanism": "Integrations index (130+ connectors)",
+      "disposition": "excluded",
+      "detail": "Excluded: third-party inbound data-source connectors, not provider-defined interfaces for accessing Databox itself."
+    },
+    {
+      "mechanism": "SSO / OAuth / authentication",
+      "disposition": "excluded",
+      "detail": "Excluded per counting rules: authentication methods, not logical interfaces."
+    }
+  ],
+  "channel_evidence": {
+    "Interactive": "observed",
+    "Agentic": "observed",
+    "Conversational": "observed",
+    "Event": "no_evidence_observed",
+    "Programmatic": "observed"
+  },
+  "number_of_interfaces": 5,
+  "multi_interface": true,
+  "number_of_channels": 4,
+  "multi_channel": true
+}

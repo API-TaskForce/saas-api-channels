@@ -1,0 +1,129 @@
+{
+  "schema_version": "1.0",
+  "generator": {
+    "platform": "Claude",
+    "provider": "Anthropic",
+    "model": "claude-opus-4-8",
+    "skill": "saas-interface-channel-analyzer",
+    "skill_version": "1.0"
+  },
+  "generated_at": "2026-09-24T12:00:00Z",
+  "evidence_checked_at": "2026-09-24T12:00:00Z",
+  "saas": {
+    "name": "Crowdcast"
+  },
+  "interfaces": [
+    {
+      "name": "Web application",
+      "technology": "Browser-based SPA (WebRTC/HLS)",
+      "channel": "Interactive",
+      "classification_rationale": "Actions are expressed by manipulating presented affordances (registration, chat, Q&A, polls, CTA, screen share, Go Live) of a persistent navigable representation of the event; primitive is affordance manipulation with consumer-driven control.",
+      "provenance": [
+        {
+          "url": "https://docs.crowdcast.io/en/articles/10622496-how-to-run-webinars-on-crowdcast",
+          "evidence": "Official guide describing the browser-based hosting UI and its interactive engagement controls."
+        },
+        {
+          "url": "https://docs.crowdcast.io/en/articles/7257749-which-browsers-and-devices-are-compatible-with-crowdcast",
+          "evidence": "Current (Aug 2026) provider doc confirming browser-based access for hosts and attendees."
+        }
+      ]
+    },
+    {
+      "name": "Mobile app",
+      "technology": "Native iOS/Android client",
+      "channel": "Interactive",
+      "classification_rationale": "First-party native client where the consumer manipulates on-screen affordances (chat, polls, upvote questions) of the event representation; same paradigm as web on a distinct client surface and runtime.",
+      "provenance": [
+        {
+          "url": "https://apps.apple.com/us/app/crowdcast-mobile/id1119071572",
+          "evidence": "Provider (Crowdcast Inc.) App Store listing for the first-party mobile client."
+        },
+        {
+          "url": "https://docs.crowdcast.io/en/articles/7257749-which-browsers-and-devices-are-compatible-with-crowdcast",
+          "evidence": "Current provider doc stating attendees can use the Crowdcast app for Android or iOS."
+        }
+      ]
+    },
+    {
+      "name": "RTMP ingest (RTMP Mode)",
+      "technology": "RTMP/RTMPS publish to Server URL + Stream Key",
+      "channel": "Programmatic",
+      "classification_rationale": "The consumer explicitly invokes a provider-defined publish operation, pushing a stream from an external encoder to a provider ingest endpoint identified by Server URL and Stream Key, analogous to SMTP submission or Git remote push.",
+      "provenance": [
+        {
+          "url": "https://docs.crowdcast.io/en/articles/7260494-connecting-live-streaming-software-with-rtmp-mode",
+          "evidence": "Current (Jun 2026) official RTMP Mode doc defining the ingest endpoint and stream key publishing flow from OBS, Wirecast, Ecamm, vMix."
+        }
+      ]
+    }
+  ],
+  "access_mechanism_ledger": [
+    {
+      "mechanism": "Web application (browser)",
+      "disposition": "interface",
+      "detail": "Web application (Interactive)"
+    },
+    {
+      "mechanism": "Mobile app (iOS/Android, first-party)",
+      "disposition": "interface",
+      "detail": "Mobile app (Interactive)"
+    },
+    {
+      "mechanism": "RTMP Mode ingest",
+      "disposition": "interface",
+      "detail": "RTMP ingest (Programmatic)"
+    },
+    {
+      "mechanism": "First-party desktop client",
+      "disposition": "excluded",
+      "detail": "No native desktop app found; hosting and attending are done via browser."
+    },
+    {
+      "mechanism": "CLI / TUI",
+      "disposition": "excluded",
+      "detail": "No command-line interface or TUI dashboard documented."
+    },
+    {
+      "mechanism": "Conversational / AI assistant",
+      "disposition": "excluded",
+      "detail": "No first-party natural-language assistant documented."
+    },
+    {
+      "mechanism": "Zapier integration (with generated API key)",
+      "disposition": "excluded",
+      "detail": "Third-party integration platform; underlying API is partner-scoped and documented only for Zapier, with no public operation/base/auth reference to reconstruct a directly consumable Programmatic interface."
+    },
+    {
+      "mechanism": "Native API / event webhooks (registration, question, session-ended triggers)",
+      "disposition": "excluded",
+      "detail": "Surfaced only through Zapier; provider sources do not establish native push webhooks versus Zapier polling, so no Event interface is established. No evidence is not absence."
+    },
+    {
+      "mechanism": "Stripe and Patreon direct integrations",
+      "disposition": "excluded",
+      "detail": "Third-party integrations for payments and membership access; not a mechanism for accessing the service."
+    },
+    {
+      "mechanism": "Event embed on external sites",
+      "disposition": "excluded",
+      "detail": "Embedded instance of the web application; same interaction contract, not a distinct interface."
+    },
+    {
+      "mechanism": "Multistreaming to YouTube/Facebook (outbound RTMP)",
+      "disposition": "excluded",
+      "detail": "Outbound restream feature from Crowdcast to third parties; not a way to access Crowdcast."
+    }
+  ],
+  "channel_evidence": {
+    "Interactive": "observed",
+    "Agentic": "no_evidence_observed",
+    "Conversational": "no_evidence_observed",
+    "Event": "no_evidence_observed",
+    "Programmatic": "observed"
+  },
+  "number_of_interfaces": 3,
+  "multi_interface": true,
+  "number_of_channels": 2,
+  "multi_channel": true
+}

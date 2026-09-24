@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0",
+  "generator": {
+    "platform": "Claude",
+    "provider": "Anthropic",
+    "model": "claude-opus-4-8",
+    "skill": "saas-interface-channel-analyzer",
+    "skill_version": "1.0"
+  },
+  "generated_at": "2026-09-22T00:00:00Z",
+  "evidence_checked_at": "2026-09-22T00:00:00Z",
+  "saas": {
+    "name": "OpenBinding"
+  },
+  "interfaces": [
+    {
+      "name": "Web frontend (SPA)",
+      "technology": "React + Vite single-page web application",
+      "channel": "Interactive",
+      "classification_rationale": "Actions are expressed by manipulating presented affordances (JSON editor, engine selector, schema explorer, result views) over a persistent, navigable representation of service state.",
+      "provenance": [
+        {
+          "url": "https://github.com/isa-group/OpenBinding",
+          "evidence": "Official README describes the frontend as a React + Vite multi-page SPA with Home, Playground, Engines Explorer and Schema Explorer, served at openbinding.score.us.es."
+        }
+      ]
+    },
+    {
+      "name": "Gateway API (/v1/solve, /v1/analyze)",
+      "technology": "Python FastAPI service over HTTP/JSON",
+      "channel": "Programmatic",
+      "classification_rationale": "The consumer explicitly invokes provider-defined operations through structured HTTP/JSON requests; the gateway validates, routes and returns synchronous results, with no capability discovery, message interpretation or event-driven contract.",
+      "provenance": [
+        {
+          "url": "https://github.com/isa-group/OpenBinding",
+          "evidence": "Official README documents the FastAPI gateway as the entry point and shows a POST /v1/solve example with a structured JSON body; enhanced validation responses cover /v1/analyze and /v1/solve."
+        }
+      ]
+    }
+  ],
+  "access_mechanism_ledger": [
+    {
+      "mechanism": "Web frontend (React/Vite SPA)",
+      "disposition": "interface",
+      "detail": "Web frontend (SPA)"
+    },
+    {
+      "mechanism": "Gateway API (FastAPI, /v1/solve, /v1/analyze)",
+      "disposition": "interface",
+      "detail": "Gateway API (/v1/solve, /v1/analyze)"
+    },
+    {
+      "mechanism": "Interactive API docs (/docs, FastAPI Swagger UI)",
+      "disposition": "excluded",
+      "detail": "Auto-generated documentation page for the programmatic API, not a distinct logical interface with its own contract."
+    },
+    {
+      "mechanism": "Solver engines (MiniZinc CSP, Random Search, Many-Heuristic)",
+      "disposition": "excluded",
+      "detail": "Internal components routed by the gateway; not consumer-facing access mechanisms."
+    },
+    {
+      "mechanism": "curl examples in README",
+      "disposition": "excluded",
+      "detail": "Not a first-party CLI; only illustrates HTTP calls to the programmatic API."
+    },
+    {
+      "mechanism": "First-party mobile client",
+      "disposition": "excluded",
+      "detail": "No evidence in official sources."
+    },
+    {
+      "mechanism": "First-party desktop client",
+      "disposition": "excluded",
+      "detail": "No evidence in official sources."
+    },
+    {
+      "mechanism": "First-party CLI / TUI",
+      "disposition": "excluded",
+      "detail": "No provider CLI; docker/npm/mvn/uvicorn commands are development tooling, not a service access interface."
+    },
+    {
+      "mechanism": "Webhooks / events / inbound delivery",
+      "disposition": "excluded",
+      "detail": "No evidence; the gateway responds synchronously and does not initiate event-driven delivery."
+    },
+    {
+      "mechanism": "Conversational / chat / AI assistant",
+      "disposition": "excluded",
+      "detail": "No evidence in official sources."
+    },
+    {
+      "mechanism": "MCP / agent protocol",
+      "disposition": "excluded",
+      "detail": "No evidence in official sources."
+    }
+  ],
+  "channel_evidence": {
+    "Interactive": "observed",
+    "Agentic": "no_evidence_observed",
+    "Conversational": "no_evidence_observed",
+    "Event": "no_evidence_observed",
+    "Programmatic": "observed"
+  },
+  "number_of_interfaces": 2,
+  "multi_interface": true,
+  "number_of_channels": 2,
+  "multi_channel": true
+}

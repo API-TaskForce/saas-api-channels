@@ -60,7 +60,7 @@ The Event channel is recorded as "no evidence observed" rather than absent. Zapi
 
 ```json
 {
-  "schema_version": "2.1",
+  "schema_version": "1.0",
   "generator": {
     "platform": "Claude",
     "provider": "Anthropic",

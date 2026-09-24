@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0",
+  "generator": {
+    "platform": "Claude",
+    "provider": "Anthropic",
+    "model": "claude-opus-4-8",
+    "skill": "saas-interface-channel-analyzer",
+    "skill_version": "1.0"
+  },
+  "generated_at": "2026-09-24T12:00:00Z",
+  "evidence_checked_at": "2026-09-24T12:00:00Z",
+  "saas": {
+    "name": "Jira"
+  },
+  "interfaces": [
+    {
+      "name": "Jira web application",
+      "technology": "Web UI (browser)",
+      "channel": "Interactive",
+      "classification_rationale": "Actions are expressed by manipulating boards, forms, menus, and views of a persistent navigable representation of service state, which is affordance manipulation.",
+      "provenance": [
+        { "url": "https://www.atlassian.com/software/jira/guides/mobile-apps/overview", "evidence": "Distinguishes the Jira web surface as the place for advanced configuration and admin setup, confirming a first-party web client." }
+      ]
+    },
+    {
+      "name": "Jira mobile app",
+      "technology": "Native iOS and Android clients",
+      "channel": "Interactive",
+      "classification_rationale": "A first-party mobile client where the consumer manipulates presented views and controls; a distinct surface from web but the same affordance-manipulation primitive.",
+      "provenance": [
+        { "url": "https://www.atlassian.com/software/jira/mobile-app", "evidence": "Official iOS and Android app for accessing projects, boards, and updates." },
+        { "url": "https://www.atlassian.com/software/jira/guides/mobile-apps/overview", "evidence": "Describes mobile access to boards, backlogs, approvals, and forms." }
+      ]
+    },
+    {
+      "name": "Jira Cloud platform REST API",
+      "technology": "REST over HTTP (JSON, API v3)",
+      "channel": "Programmatic",
+      "classification_rationale": "The consumer explicitly invokes provider-defined operations through structured HTTP requests, which is operation invocation.",
+      "provenance": [
+        { "url": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/", "evidence": "States the REST API lets you interact with Jira programmatically using standard HTTP methods." }
+      ]
+    },
+    {
+      "name": "Atlassian GraphQL API (Gateway)",
+      "technology": "GraphQL over HTTP",
+      "channel": "Programmatic",
+      "classification_rationale": "Separately exposed query and mutation invocation over a distinct endpoint and primitive from REST; still explicit operation invocation.",
+      "provenance": [
+        { "url": "https://developer.atlassian.com/platform/atlassian-graphql-api/graphql/", "evidence": "Exposes Jira data such as projects and Jira fields through the Atlassian GraphQL Gateway." }
+      ]
+    },
+    {
+      "name": "Atlassian CLI (ACLI)",
+      "technology": "Command-line binary (acli jira)",
+      "channel": "Programmatic",
+      "classification_rationale": "Structured terminal commands invoke provider-defined operations on work items, boards, and sprints, which is operation invocation.",
+      "provenance": [
+        { "url": "https://developer.atlassian.com/cloud/acli/reference/commands/jira/", "evidence": "Documents acli jira subcommands including workitem create, edit, transition, and search." }
+      ]
+    },
+    {
+      "name": "Incoming email (mail handler)",
+      "technology": "POP, IMAP, or Microsoft Graph mailbox processing",
+      "channel": "Programmatic",
+      "classification_rationale": "A submitted email message maps to a fixed provider-defined operation (create issue or add comment), resembling SMTP submission rather than natural-language conversation.",
+      "provenance": [
+        { "url": "https://support.atlassian.com/jira-cloud-administration/docs/create-issues-and-comments-from-email/", "evidence": "Jira scans a configured mailbox and creates work items or comments from received email via a mail handler." }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "technology": "User-defined HTTP POST callbacks",
+      "channel": "Event",
+      "classification_rationale": "The service initiates the interaction on subscribed events and delivers to a consumer-controlled receiver, which is event notification.",
+      "provenance": [
+        { "url": "https://developer.atlassian.com/server/jira/platform/webhooks/", "evidence": "Webhooks are user-defined callbacks that push notifications to a remote endpoint when Jira events occur." },
+        { "url": "https://developer.atlassian.com/cloud/jira/platform/integrate-jira-issues-with-your-application", "evidence": "Lists REST APIs and webhooks as the Jira Cloud product integration mechanisms." }
+      ]
+    },
+    {
+      "name": "Rovo conversational assistant",
+      "technology": "Rovo Chat in-product, plus first-party chat surfaces",
+      "channel": "Conversational",
+      "classification_rationale": "The primitive is the natural-language message interpreted by the service, with tool orchestration internal to the service, which is contextual conversation.",
+      "provenance": [
+        { "url": "https://support.atlassian.com/rovo/kb/rovo-capabilities-and-features-for-atlassian-cloud/", "evidence": "Rovo Chat is reached from the product top navigation and answers natural-language queries." },
+        { "url": "https://www.atlassian.com/software/jira/ai", "evidence": "Rovo in Jira creates and updates work items from chat." }
+      ]
+    },
+    {
+      "name": "Atlassian Rovo MCP Server",
+      "technology": "Remote MCP endpoint (mcp.atlassian.com)",
+      "channel": "Agentic",
+      "classification_rationale": "The server advertises primary tools and lets clients discover the rest of the catalog on demand, so capability discovery and selection are part of the contract, resolving to Agentic under the MCP boundary rule.",
+      "provenance": [
+        { "url": "https://developer.atlassian.com/cloud/rovo-mcp/", "evidence": "Describes discovery of the tool catalog on demand through a discover tool over an OAuth-authorized MCP endpoint." },
+        { "url": "https://support.atlassian.com/atlassian-rovo-mcp-server/docs/getting-started-with-the-atlassian-remote-mcp-server/", "evidence": "Official remote MCP server through which AI clients select and run Jira actions with the user's permissions." }
+      ]
+    }
+  ],
+  "access_mechanism_ledger": [
+    { "mechanism": "Web client (first-party, web surface)", "disposition": "interface", "detail": "Jira web application" },
+    { "mechanism": "Mobile client (first-party, mobile surface)", "disposition": "interface", "detail": "Jira mobile app" },
+    { "mechanism": "Desktop client (first-party, desktop surface)", "disposition": "excluded", "detail": "No current first-party desktop client; Jira for Mac was retired in Feb 2022 and no Windows client exists (JRACLOUD-78044 at Gathering Interest)." },
+    { "mechanism": "CLI (first-party, terminal surface)", "disposition": "interface", "detail": "Atlassian CLI (ACLI)" },
+    { "mechanism": "CLI persistent TUI dashboard", "disposition": "excluded", "detail": "ACLI is command-based; no official persistent navigable TUI observed." },
+    { "mechanism": "REST API", "disposition": "interface", "detail": "Jira Cloud platform REST API" },
+    { "mechanism": "GraphQL API", "disposition": "interface", "detail": "Atlassian GraphQL API (Gateway)" },
+    { "mechanism": "Webhooks / events", "disposition": "interface", "detail": "Webhooks" },
+    { "mechanism": "Incoming email / mail handler", "disposition": "interface", "detail": "Incoming email (mail handler)" },
+    { "mechanism": "Conversational / AI assistant (Rovo Chat)", "disposition": "interface", "detail": "Rovo conversational assistant" },
+    { "mechanism": "First-party chat integrations (@Jira in Teams and Slack)", "disposition": "interface", "detail": "Folded into Rovo conversational assistant (same natural-language-message paradigm)." },
+    { "mechanism": "MCP / agent protocol (Rovo MCP Server)", "disposition": "interface", "detail": "Atlassian Rovo MCP Server" },
+    { "mechanism": "Atlassian Agent2Agent (A2A) Gateway", "disposition": "excluded", "detail": "Cross-product Rovo platform gateway, not a core-Jira-specific interface; its paradigm (Agentic) is already represented by the MCP server." },
+    { "mechanism": "Connect and Forge app frameworks", "disposition": "excluded", "detail": "App-development and extension frameworks that consume the REST and GraphQL APIs; not access interfaces themselves." },
+    { "mechanism": "SDKs and client libraries", "disposition": "excluded", "detail": "Wrappers over the REST API, not interfaces." },
+    { "mechanism": "JQL", "disposition": "excluded", "detail": "A query language used within other interfaces, not a standalone access mechanism." },
+    { "mechanism": "JSM portal and email channel, Jira Product Discovery, Jira Align", "disposition": "excluded", "detail": "Separate products in the Jira family, out of scope for core Jira." }
+  ],
+  "channel_evidence": {
+    "Interactive": "observed",
+    "Agentic": "observed",
+    "Conversational": "observed",
+    "Event": "observed",
+    "Programmatic": "observed"
+  },
+  "number_of_interfaces": 9,
+  "multi_interface": true,
+  "number_of_channels": 5,
+  "multi_channel": true
+}

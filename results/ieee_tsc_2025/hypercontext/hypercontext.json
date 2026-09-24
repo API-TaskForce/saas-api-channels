@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "generator": {
+    "platform": "Claude",
+    "provider": "Anthropic",
+    "model": "claude-opus-4-8",
+    "skill": "saas-interface-channel-analyzer",
+    "skill_version": "1.0"
+  },
+  "generated_at": "2026-09-24T12:00:00Z",
+  "evidence_checked_at": "2026-09-24T12:00:00Z",
+  "saas": {
+    "name": "Hypercontext"
+  },
+  "interfaces": [
+    {
+      "name": "Graphical application client",
+      "technology": "Web app, iOS/iPadOS and Android mobile apps, macOS desktop app, Chrome browser extension",
+      "channel": "Interactive",
+      "classification_rationale": "Actions are expressed by manipulating presented affordances (agendas, notes, calendar views, controls) of a persistent, navigable representation of the account's service state. All client surfaces share the same primitive, base state, and authentication, so they form one logical interface materialized across technologies.",
+      "provenance": [
+        {
+          "url": "https://apps.apple.com/us/app/hypercontext/id1572485643",
+          "evidence": "Provider (SoapBox Innovations) app-store listing describing the iOS/iPad app and the 'Hypercontext Mac App' with navigable menu-bar calendar, agendas, notes and next steps: affordance-manipulation UI. Freshness: Hypercontext-era clients; provider now Spinach AI."
+        },
+        {
+          "url": "https://www.spinach.ai/hypercontext",
+          "evidence": "Provider web login ('Hypercontext is now Spinach AI', Continue with Google/Email/Microsoft) confirms the web application client."
+        }
+      ]
+    },
+    {
+      "name": "Account HTTP API",
+      "technology": "HTTP endpoint authenticated with a private per-account API key",
+      "channel": "Programmatic",
+      "classification_rationale": "The consumer explicitly invokes provider-defined operations (create/close next steps) through structured HTTP requests authenticated by a per-account API key. Operation invocation via structured requests fixes the paradigm as Programmatic; the consumer type (Zapier) does not determine the channel.",
+      "provenance": [
+        {
+          "url": "https://help.hypercontext.com/en/articles/4211687-common-problems-with-hypercontext-app-integration-with-zapier",
+          "evidence": "Provider help center documents generating a private account API key and a structured request body format (next_step_id: ##) to invoke next-step operations from another application. Scope/freshness: no standalone public API reference located; documentation confined to the Zapier integration context."
+        }
+      ]
+    }
+  ],
+  "access_mechanism_ledger": [
+    { "mechanism": "Web client", "disposition": "interface", "detail": "Graphical application client" },
+    { "mechanism": "Mobile app (iOS/iPadOS, Android)", "disposition": "interface", "detail": "Graphical application client" },
+    { "mechanism": "Desktop app (macOS)", "disposition": "interface", "detail": "Graphical application client" },
+    { "mechanism": "Chrome extension", "disposition": "interface", "detail": "Graphical application client" },
+    { "mechanism": "Terminal / CLI client", "disposition": "excluded", "detail": "No first-party terminal client found" },
+    { "mechanism": "Account HTTP API / API key", "disposition": "interface", "detail": "Account HTTP API" },
+    { "mechanism": "Webhooks / events / outbound triggers", "disposition": "excluded", "detail": "No official evidence of a native event/webhook interface with a consumer-controlled receiver; event-like delivery is mediated by the third-party Zapier integration" },
+    { "mechanism": "Conversational / AI assistant / voice commands", "disposition": "excluded", "detail": "No official evidence of a natural-language interface within the Hypercontext product contract; voice commands are documented under Spinach's meeting assistant, out of Hypercontext scope" },
+    { "mechanism": "SMTP / email submission", "disposition": "excluded", "detail": "Automated note emails are an outbound notification feature, not a consumer-invocable interface" },
+    { "mechanism": "Third-party integrations (Slack, Teams, Google Calendar/Meet, Outlook, Zoom, Jira, Asana, Linear, Airtable, Zapier 3000+ apps)", "disposition": "excluded", "detail": "Third-party integrations, not provider-defined logical interfaces" },
+    { "mechanism": "PyPI 'hypercontext' package / agent framework", "disposition": "excluded", "detail": "Name collision; unrelated project" }
+  ],
+  "channel_evidence": {
+    "Interactive": "observed",
+    "Agentic": "no_evidence_observed",
+    "Conversational": "no_evidence_observed",
+    "Event": "no_evidence_observed",
+    "Programmatic": "observed"
+  },
+  "number_of_interfaces": 2,
+  "multi_interface": true,
+  "number_of_channels": 2,
+  "multi_channel": true
+}

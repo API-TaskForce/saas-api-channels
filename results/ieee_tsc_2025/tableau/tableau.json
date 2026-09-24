@@ -1,0 +1,321 @@
+{
+  "schema_version": "1.0",
+  "generator": {
+    "platform": "Claude",
+    "provider": "Anthropic",
+    "model": "UNKNOWN",
+    "skill": "saas-interface-channel-analyzer",
+    "skill_version": "1.0"
+  },
+  "generated_at": "2026-09-23T00:00:00Z",
+  "evidence_checked_at": "2026-09-23T00:00:00Z",
+  "saas": {
+    "name": "Tableau"
+  },
+  "interfaces": [
+    {
+      "name": "Tableau web application (Cloud / Server browser client)",
+      "technology": "Web UI",
+      "channel": "Interactive",
+      "classification_rationale": "Actions are expressed by manipulating presented affordances (views, shelves, menus, filters) of a persistent, navigable representation of workbooks, dashboards, and projects.",
+      "provenance": [
+        {
+          "url": "https://help.tableau.com/current/online/en-us/dev_resources.htm",
+          "evidence": "Developer resources overview confirming the browser-based Tableau Cloud/Server environment."
+        },
+        {
+          "url": "https://help.tableau.com/current/online/en-us/web_author_einstein_faq.htm",
+          "evidence": "References Tableau Cloud and Server web authoring as an interactive environment."
+        }
+      ]
+    },
+    {
+      "name": "Tableau Desktop",
+      "technology": "Desktop GUI",
+      "channel": "Interactive",
+      "classification_rationale": "A first-party desktop viz-authoring client whose drag-and-drop canvas is a navigable representation acted on through affordance manipulation.",
+      "provenance": [
+        {
+          "url": "https://help.tableau.com/current/online/en-us/web_author_einstein_faq.htm",
+          "evidence": "Documents Tableau Agent inside Tableau Desktop, establishing Desktop as a first-party client."
+        }
+      ]
+    },
+    {
+      "name": "Tableau Prep Builder",
+      "technology": "Desktop GUI",
+      "channel": "Interactive",
+      "classification_rationale": "A first-party desktop flow-authoring client with a distinct canvas contract from Desktop, still acted on through affordance manipulation.",
+      "provenance": [
+        {
+          "url": "https://help.tableau.com/current/online/en-us/web_author_einstein_faq.htm",
+          "evidence": "References Tableau Agent in Tableau Prep, establishing Prep Builder as a distinct authoring surface."
+        }
+      ]
+    },
+    {
+      "name": "Tableau Mobile",
+      "technology": "Mobile app",
+      "channel": "Interactive",
+      "classification_rationale": "A first-party mobile client for consuming and navigating content, which is affordance manipulation of service state.",
+      "provenance": [
+        {
+          "url": "https://help.tableau.com/current/online/en-us/pulse_intro.htm",
+          "evidence": "States Pulse is available on web and mobile."
+        },
+        {
+          "url": "https://help.tableau.com/current/blueprint/en-us/bp_extensibility.htm",
+          "evidence": "References the Tableau Mobile client via Mobile App Bootstrap."
+        }
+      ]
+    },
+    {
+      "name": "Tableau REST API",
+      "technology": "REST over HTTP",
+      "channel": "Programmatic",
+      "classification_rationale": "The consumer explicitly invokes provider-defined endpoints for sites, users, workbooks, data sources, and flows through structured HTTP requests.",
+      "provenance": [
+        {
+          "url": "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref.htm",
+          "evidence": "Full endpoint reference for managing Tableau resources programmatically over HTTP."
+        }
+      ]
+    },
+    {
+      "name": "VizQL Data Service (VDS) API",
+      "technology": "REST over HTTP",
+      "channel": "Programmatic",
+      "classification_rationale": "Programmatic querying of published data sources through a structured query payload; explicit operation invocation on a distinct base from the management REST API. AI-agent framing does not change the paradigm.",
+      "provenance": [
+        {
+          "url": "https://help.tableau.com/current/api/vizql-data-service/en-us/index.html",
+          "evidence": "Documents programmatic query access to published data sources (headless BI)."
+        }
+      ]
+    },
+    {
+      "name": "Metadata API",
+      "technology": "GraphQL over HTTP",
+      "channel": "Programmatic",
+      "classification_rationale": "GraphQL queries submitted against a fixed metadata schema are explicit structured invocation, not capability discovery as a contract.",
+      "provenance": [
+        {
+          "url": "https://help.tableau.com/current/api/metadata_api/en-us/index.html",
+          "evidence": "Documents a GraphQL API for querying content metadata and lineage."
+        }
+      ]
+    },
+    {
+      "name": "tabcmd command-line utility",
+      "technology": "CLI",
+      "channel": "Programmatic",
+      "classification_rationale": "A command-based CLI issuing structured commands to the server, which is operation invocation.",
+      "provenance": [
+        {
+          "url": "https://trailhead.salesforce.com/content/learn/modules/tableau-developer-platform/get-started-with-the-tableau-developer-platform",
+          "evidence": "Official platform module lists tabcmd among automation and integration tools."
+        }
+      ]
+    },
+    {
+      "name": "Tableau Services Manager (TSM) administrative interface",
+      "technology": "CLI and REST API",
+      "channel": "Programmatic",
+      "classification_rationale": "Server administration via structured commands and requests over a base and auth distinct from the content REST API; both surfaces are operation invocation. Its browser admin console is a separate Interactive surface already covered by the Interactive channel.",
+      "provenance": [
+        {
+          "url": "https://trailhead.salesforce.com/content/learn/modules/tableau-developer-platform/get-started-with-the-tableau-developer-platform",
+          "evidence": "Official platform module lists TSM among automation and integration tooling for Tableau Server."
+        }
+      ]
+    },
+    {
+      "name": "Tableau Webhooks",
+      "technology": "HTTP callbacks",
+      "channel": "Event",
+      "classification_rationale": "The service initiates an HTTP POST to a consumer-specified destination URL when a subscribed event occurs, which is event notification to a consumer-controlled receiver.",
+      "provenance": [
+        {
+          "url": "https://help.tableau.com/current/developer/webhooks/en-us/docs/webhooks-get-started.html",
+          "evidence": "Describes event-triggered HTTP POST with JSON payload to a configured destination URL."
+        }
+      ]
+    },
+    {
+      "name": "Tableau MCP server",
+      "technology": "Model Context Protocol",
+      "channel": "Agentic",
+      "classification_rationale": "Exposes semantically described tools, resources, and prompts that the consumer discovers and selects as part of the interaction contract, which is the defining feature of the Agentic paradigm under the MCP boundary rule.",
+      "provenance": [
+        {
+          "url": "https://tableau.github.io/tableau-mcp/docs/intro",
+          "evidence": "Official Tableau MCP project exposing discoverable tools over VDS, Metadata, and Pulse APIs for AI applications."
+        }
+      ]
+    },
+    {
+      "name": "Tableau Agent / Tableau Pulse natural-language Q&A",
+      "technology": "Natural-language assistant",
+      "channel": "Conversational",
+      "classification_rationale": "The consumer expresses intent through natural-language messages the service interprets to build vizzes, calculations, and insights, with tool orchestration internal to the service.",
+      "provenance": [
+        {
+          "url": "https://help.tableau.com/current/online/en-us/web_author_einstein.htm",
+          "evidence": "Describes typing natural-language questions to a conversational assistant that creates and iterates on vizzes."
+        },
+        {
+          "url": "https://help.tableau.com/current/online/en-us/pulse_ask_discover_qa.htm",
+          "evidence": "Documents asking questions in natural language in Pulse to explore metrics."
+        }
+      ]
+    }
+  ],
+  "access_mechanism_ledger": [
+    {
+      "mechanism": "Web browser client (Cloud / Server)",
+      "disposition": "interface",
+      "detail": "Tableau web application"
+    },
+    {
+      "mechanism": "Desktop client",
+      "disposition": "interface",
+      "detail": "Tableau Desktop; Tableau Prep Builder"
+    },
+    {
+      "mechanism": "Mobile client",
+      "disposition": "interface",
+      "detail": "Tableau Mobile"
+    },
+    {
+      "mechanism": "Terminal / CLI",
+      "disposition": "interface",
+      "detail": "tabcmd; TSM (CLI portion)"
+    },
+    {
+      "mechanism": "TUI dashboard",
+      "disposition": "excluded",
+      "detail": "No persistent navigable text UI documented; CLI prompts are command arguments, not a TUI."
+    },
+    {
+      "mechanism": "REST API",
+      "disposition": "interface",
+      "detail": "Tableau REST API"
+    },
+    {
+      "mechanism": "VizQL Data Service",
+      "disposition": "interface",
+      "detail": "VDS API"
+    },
+    {
+      "mechanism": "Metadata API (GraphQL)",
+      "disposition": "interface",
+      "detail": "Metadata API"
+    },
+    {
+      "mechanism": "Pulse API",
+      "disposition": "excluded",
+      "detail": "Subsumed into the Tableau REST API (same base and auth)."
+    },
+    {
+      "mechanism": "Tableau Services Manager (TSM)",
+      "disposition": "interface",
+      "detail": "TSM administrative interface; its admin console is an Interactive surface already covered by the Interactive channel."
+    },
+    {
+      "mechanism": "Webhooks / events",
+      "disposition": "interface",
+      "detail": "Tableau Webhooks"
+    },
+    {
+      "mechanism": "Conversational / AI assistant",
+      "disposition": "interface",
+      "detail": "Tableau Agent / Pulse Q&A"
+    },
+    {
+      "mechanism": "MCP / agent protocol",
+      "disposition": "interface",
+      "detail": "Tableau MCP server"
+    },
+    {
+      "mechanism": "Email subscriptions (scheduled delivery)",
+      "disposition": "excluded",
+      "detail": "End-user notification feature delivering to inboxes on a schedule, not a consumer-controlled event receiver."
+    },
+    {
+      "mechanism": "SMTP / relay",
+      "disposition": "excluded",
+      "detail": "No inbound SMTP submission interface documented."
+    },
+    {
+      "mechanism": "Embedding API (JavaScript API)",
+      "disposition": "excluded",
+      "detail": "Client library that embeds and controls the existing Interactive web viz, not a distinct provider contract."
+    },
+    {
+      "mechanism": "Dashboard Extensions API / Viz Extensions API",
+      "disposition": "excluded",
+      "detail": "Extensibility SDK for add-ons running inside Tableau, not an external access mechanism."
+    },
+    {
+      "mechanism": "Analytics Extensions API",
+      "disposition": "excluded",
+      "detail": "Outbound integration in which Tableau calls external analytics services."
+    },
+    {
+      "mechanism": "TabPy",
+      "disposition": "excluded",
+      "detail": "External analytics service Tableau invokes, not a Tableau access interface."
+    },
+    {
+      "mechanism": "Hyper API",
+      "disposition": "excluded",
+      "detail": "Client library for local .hyper extract files, not a service access interface."
+    },
+    {
+      "mechanism": "Connector SDK / Web Data Connector SDK",
+      "disposition": "excluded",
+      "detail": "SDKs for building data connectors."
+    },
+    {
+      "mechanism": "Tableau Server Client (TSC)",
+      "disposition": "excluded",
+      "detail": "Python client library wrapping the REST API."
+    },
+    {
+      "mechanism": "Mobile App Bootstrap",
+      "disposition": "excluded",
+      "detail": "Open-source sample app, not a provider interface."
+    },
+    {
+      "mechanism": "Connected Apps (direct trust / OAuth)",
+      "disposition": "excluded",
+      "detail": "Authentication and authorization mechanism."
+    },
+    {
+      "mechanism": "Postman Collection",
+      "disposition": "excluded",
+      "detail": "Request collection for the REST API, not an interface."
+    },
+    {
+      "mechanism": "Tableau Exchange (integrations index)",
+      "disposition": "excluded",
+      "detail": "Third-party marketplace, not a provider interface."
+    },
+    {
+      "mechanism": "Tableau Public",
+      "disposition": "excluded",
+      "detail": "Variant offering exposing the same web and desktop interfaces already classified."
+    }
+  ],
+  "channel_evidence": {
+    "Interactive": "observed",
+    "Agentic": "observed",
+    "Conversational": "observed",
+    "Event": "observed",
+    "Programmatic": "observed"
+  },
+  "number_of_interfaces": 12,
+  "multi_interface": true,
+  "number_of_channels": 5,
+  "multi_channel": true
+}

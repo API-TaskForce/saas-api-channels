@@ -1,0 +1,216 @@
+{
+  "schema_version": "1.0",
+  "generator": {
+    "platform": "Claude",
+    "provider": "Anthropic",
+    "model": "claude-opus-4-8",
+    "skill": "saas-interface-channel-analyzer",
+    "skill_version": "1.0"
+  },
+  "generated_at": "2026-09-22T00:00:00Z",
+  "evidence_checked_at": "2026-09-22T00:00:00Z",
+  "saas": {
+    "name": "Postman"
+  },
+  "interfaces": [
+    {
+      "name": "Web application",
+      "technology": "Browser-based web client",
+      "channel": "Interactive",
+      "classification_rationale": "Actions are expressed by manipulating presented affordances (views, controls, forms) over a persistent, navigable representation of service state.",
+      "provenance": [
+        {
+          "url": "https://learning.postman.com/docs/getting-started/installation/install-app",
+          "evidence": "Official install docs confirm Postman is available as a web app for API development and testing tasks in the browser."
+        }
+      ]
+    },
+    {
+      "name": "Desktop application",
+      "technology": "Native desktop app (Windows, macOS, Linux)",
+      "channel": "Interactive",
+      "classification_rationale": "Native GUI client whose primitive is affordance manipulation over a navigable state representation; a distinct surface from the web app.",
+      "provenance": [
+        {
+          "url": "https://learning.postman.com/docs/getting-started/installation/install-app",
+          "evidence": "Official install docs confirm the native desktop app for Windows, macOS and Linux as the full Postman experience."
+        }
+      ]
+    },
+    {
+      "name": "Postman API",
+      "technology": "REST API over HTTP with API key auth (includes SCIM subset)",
+      "channel": "Programmatic",
+      "classification_rationale": "Consumer explicitly invokes provider-defined operations through structured HTTP requests to manage collections, environments, monitors and other assets.",
+      "provenance": [
+        {
+          "url": "https://learning.postman.com/docs/developer/postman-api/intro-api",
+          "evidence": "Official docs describe programmatically managing Postman assets via the REST API; SCIM API shares the same REST invocation paradigm for provisioning."
+        }
+      ]
+    },
+    {
+      "name": "Postman CLI",
+      "technology": "Command-line executable",
+      "channel": "Programmatic",
+      "classification_rationale": "Command-based invocation of provider-defined operations (run collections, governance and security checks) from the command line.",
+      "provenance": [
+        {
+          "url": "https://learning.postman.com/concepts",
+          "evidence": "Official overview presents the Postman CLI as a secure command-line companion that runs collections and checks API definitions."
+        }
+      ]
+    },
+    {
+      "name": "Newman",
+      "technology": "Command-line collection runner (npm package)",
+      "channel": "Programmatic",
+      "classification_rationale": "First-party command-line runner invoking collection runs via structured commands; distinct executable and base from Postman CLI, same command paradigm.",
+      "provenance": [
+        {
+          "url": "https://learning.postman.com/docs/reference/newman-cli/command-line-integration-with-newman",
+          "evidence": "Official docs describe Newman as a command-line tool for running Postman Collections; noted as legacy for v12 collections with recommended migration to Postman CLI."
+        }
+      ]
+    },
+    {
+      "name": "Postman MCP server",
+      "technology": "Model Context Protocol server (remote and local)",
+      "channel": "Agentic",
+      "classification_rationale": "Exposes semantically described capabilities over Postman resources that an agent discovers and selects; discovery and selection are part of the interaction contract (MCP boundary case resolves to Agentic).",
+      "provenance": [
+        {
+          "url": "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/overview",
+          "evidence": "Official docs state the Postman MCP server enables AI agents to manage Postman resources, translating natural language commands into API workflows via exposed tools."
+        }
+      ]
+    },
+    {
+      "name": "Agent Mode",
+      "technology": "In-app natural-language assistant (formerly Postbot)",
+      "channel": "Conversational",
+      "classification_rationale": "Consumer interacts through natural-language messages interpreted by the service; tool orchestration is internal and not part of the consumer-facing contract (natural-language-assistant boundary case resolves to Conversational).",
+      "provenance": [
+        {
+          "url": "https://learning.postman.com/docs/use/agent-mode/overview",
+          "evidence": "Official docs describe Agent Mode as turning natural-language words into action across the API lifecycle using built-in tools within Postman."
+        }
+      ]
+    },
+    {
+      "name": "Custom webhooks (outbound event delivery)",
+      "technology": "Outbound webhooks to a consumer-controlled URL",
+      "channel": "Event",
+      "classification_rationale": "The service initiates delivery when subscribed events occur (monitor results, team and collection activity feeds, backups) to a consumer-controlled receiver endpoint.",
+      "provenance": [
+        {
+          "url": "https://learning.postman.com/docs/integrations/webhooks",
+          "evidence": "Official docs describe configuring custom webhooks to send events such as monitor results and activity feeds to a webhook URL whenever those events occur."
+        }
+      ]
+    }
+  ],
+  "access_mechanism_ledger": [
+    {
+      "mechanism": "Web client",
+      "disposition": "interface",
+      "detail": "Web application (Interactive)"
+    },
+    {
+      "mechanism": "Desktop client",
+      "disposition": "interface",
+      "detail": "Desktop application (Interactive)"
+    },
+    {
+      "mechanism": "Mobile client (iOS/Android)",
+      "disposition": "excluded",
+      "detail": "No official first-party mobile client; only a long-standing feature request"
+    },
+    {
+      "mechanism": "Terminal / TUI",
+      "disposition": "excluded",
+      "detail": "CLIs are command-based; no persistent navigable TUI is shipped"
+    },
+    {
+      "mechanism": "Postman API (REST)",
+      "disposition": "interface",
+      "detail": "Postman API (Programmatic)"
+    },
+    {
+      "mechanism": "SCIM API",
+      "disposition": "excluded",
+      "detail": "Folded into Postman API: same REST operation-invocation paradigm (provisioning subset)"
+    },
+    {
+      "mechanism": "Postman CLI",
+      "disposition": "interface",
+      "detail": "Postman CLI (Programmatic)"
+    },
+    {
+      "mechanism": "Newman",
+      "disposition": "interface",
+      "detail": "Newman (Programmatic)"
+    },
+    {
+      "mechanism": "Postman MCP server",
+      "disposition": "interface",
+      "detail": "Postman MCP server (Agentic)"
+    },
+    {
+      "mechanism": "Agent Mode / Postbot",
+      "disposition": "interface",
+      "detail": "Agent Mode (Conversational)"
+    },
+    {
+      "mechanism": "Postman Flows",
+      "disposition": "excluded",
+      "detail": "Visual editor within the web/desktop app; same affordance-manipulation paradigm as the Interactive UI"
+    },
+    {
+      "mechanism": "Outbound custom webhooks",
+      "disposition": "interface",
+      "detail": "Custom webhooks (Event)"
+    },
+    {
+      "mechanism": "Inbound collection-trigger webhook",
+      "disposition": "excluded",
+      "detail": "Automation trigger where Postman is the receiver, created via the Postman API; not a distinct access interface"
+    },
+    {
+      "mechanism": "Integrations index (Slack, GitHub, CI, etc.)",
+      "disposition": "excluded",
+      "detail": "Third-party integrations, not provider-defined logical interfaces"
+    },
+    {
+      "mechanism": "SDKs (Collection SDK, Postman SDK)",
+      "disposition": "excluded",
+      "detail": "Client libraries, not interfaces"
+    },
+    {
+      "mechanism": "gRPC / WebSocket / GraphQL / SOAP request builders",
+      "disposition": "excluded",
+      "detail": "Features for testing the user's target APIs, not for accessing Postman itself"
+    },
+    {
+      "mechanism": "MCP Requests / AI Agent Builder",
+      "disposition": "excluded",
+      "detail": "Feature for testing external MCP servers and AI models, not a Postman access interface"
+    },
+    {
+      "mechanism": "llms.txt / llms-full.txt",
+      "disposition": "excluded",
+      "detail": "Documentation format, not an access interface"
+    }
+  ],
+  "channel_evidence": {
+    "Interactive": "observed",
+    "Agentic": "observed",
+    "Conversational": "observed",
+    "Event": "observed",
+    "Programmatic": "observed"
+  },
+  "number_of_interfaces": 8,
+  "multi_interface": true,
+  "number_of_channels": 5,
+  "multi_channel": true
+}

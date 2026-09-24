@@ -57,7 +57,7 @@ The MCP server is the one classification that turns on the decision-tree order r
 
 ```json
 {
-  "schema_version": "2.1",
+  "schema_version": "1.0",
   "generator": {
     "platform": "Claude",
     "provider": "Anthropic",

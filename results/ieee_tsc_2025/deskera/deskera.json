@@ -1,0 +1,159 @@
+{
+  "schema_version": "1.0",
+  "generator": {
+    "platform": "Claude",
+    "provider": "Anthropic",
+    "model": "claude-opus-4-8",
+    "skill": "saas-interface-channel-analyzer",
+    "skill_version": "1.0"
+  },
+  "generated_at": "2026-09-24T00:00:00Z",
+  "evidence_checked_at": "2026-09-24T00:00:00Z",
+  "saas": {
+    "name": "Deskera"
+  },
+  "interfaces": [
+    {
+      "name": "Deskera Web Application (BooksPlus, CRMPlus, PeoplePlus, Go)",
+      "technology": "Browser-based web UI",
+      "channel": "Interactive",
+      "classification_rationale": "Persistent, navigable product UIs where the consumer expresses actions by manipulating presented affordances (views, forms, menus). Affordance Manipulation.",
+      "provenance": [
+        {
+          "url": "https://deskera.github.io/Developer-Documentation/docs/environment/prod",
+          "evidence": "Official developer docs 'Production Environment' page lists UI URLs booksplus.deskera.com, crmplus.deskera.com, peopleplus.deskera.com, go.deskera.com."
+        }
+      ]
+    },
+    {
+      "name": "Deskera Mobile App",
+      "technology": "Native iOS and Android application",
+      "channel": "Interactive",
+      "classification_rationale": "First-party mobile client using the same affordance-manipulation paradigm on a distinct mobile surface.",
+      "provenance": [
+        {
+          "url": "https://www.deskera.com/deskera-mobile",
+          "evidence": "Official product page describing the Deskera mobile application for the workforce, syncing with the desktop backend."
+        },
+        {
+          "url": "https://apps.apple.com/us/app/deskera-business-accounting/id1463523833",
+          "evidence": "App Store listing published by Deskera Holdings Ltd., confirming a first-party iOS client."
+        },
+        {
+          "url": "https://play.google.com/store/apps/details?id=com.deskera.desk",
+          "evidence": "Google Play listing (com.deskera.desk) confirming a first-party Android client."
+        }
+      ]
+    },
+    {
+      "name": "Deskera REST API (Books, Sales, CRM+, People)",
+      "technology": "HTTP REST API",
+      "channel": "Programmatic",
+      "classification_rationale": "The consumer explicitly invokes provider-defined operations through structured HTTP requests. All product APIs share one production base and one token/OAuth auth scheme, so they form one logical interface. Operation Invocation.",
+      "provenance": [
+        {
+          "url": "https://deskera.github.io/Developer-Documentation/",
+          "evidence": "Official developer documentation portal covering Books, Sales, CRM+, and People API references."
+        },
+        {
+          "url": "https://deskera.github.io/Developer-Documentation/docs/books/started/",
+          "evidence": "Establishes token authentication (x-access-token) and REST request/response structure common to the Deskera APIs."
+        },
+        {
+          "url": "https://deskera.github.io/Developer-Documentation/docs/environment/prod",
+          "evidence": "Establishes a single production API base (bifrost-us.deskera.com) and OAuth token flow shared across the products."
+        }
+      ]
+    },
+    {
+      "name": "Deskera AI assistant (\"David\")",
+      "technology": "In-product conversational AI assistant",
+      "channel": "Conversational",
+      "classification_rationale": "Actions are expressed through natural-language messages interpreted by the service (chat to retrieve financials, create transactions, get support). Tool orchestration is internal to the service and not part of the consumer-facing contract, so Conversational rather than Agentic.",
+      "provenance": [
+        {
+          "url": "https://www.deskera.com/ai",
+          "evidence": "Official AI product page describing chat-based interaction ('chatting with your AI', 'Ask AI to create bills and invoices', 'AI-powered chat') and the assistant 'David'."
+        }
+      ]
+    }
+  ],
+  "access_mechanism_ledger": [
+    {
+      "mechanism": "REST API (Books / Sales / CRM+ / People)",
+      "disposition": "interface",
+      "detail": "Deskera REST API"
+    },
+    {
+      "mechanism": "Web application surface",
+      "disposition": "interface",
+      "detail": "Deskera Web Application"
+    },
+    {
+      "mechanism": "Mobile application surface",
+      "disposition": "interface",
+      "detail": "Deskera Mobile App"
+    },
+    {
+      "mechanism": "Conversational AI assistant (David)",
+      "disposition": "interface",
+      "detail": "Deskera AI assistant"
+    },
+    {
+      "mechanism": "OAuth endpoints",
+      "disposition": "excluded",
+      "detail": "Authentication mechanism, not a logical interface"
+    },
+    {
+      "mechanism": "Desktop application surface",
+      "disposition": "excluded",
+      "detail": "No first-party native desktop client observed; desktop use is the web application in a browser"
+    },
+    {
+      "mechanism": "Terminal / CLI surface",
+      "disposition": "excluded",
+      "detail": "Only a community sample (deskera-cli-node-sample, a Node.js API client) exists; no provider-shipped CLI product. It wraps the REST API"
+    },
+    {
+      "mechanism": "CLI TUI",
+      "disposition": "excluded",
+      "detail": "No CLI product exists, so no persistent navigable TUI"
+    },
+    {
+      "mechanism": "Webhooks / events",
+      "disposition": "excluded",
+      "detail": "No provider-defined webhook or event mechanism in the official developer docs; third-party platforms build webhooks externally around the REST API"
+    },
+    {
+      "mechanism": "MCP / agent protocol",
+      "disposition": "excluded",
+      "detail": "No official Deskera-shipped MCP server; only a generic conceptual mention in a blog post"
+    },
+    {
+      "mechanism": "Java SDK",
+      "disposition": "excluded",
+      "detail": "SDK that implements the REST API, not a logical interface"
+    },
+    {
+      "mechanism": "Third-party integrations (Make, Zapier, Integrately)",
+      "disposition": "excluded",
+      "detail": "Third-party connectors, not provider-defined interfaces"
+    },
+    {
+      "mechanism": "Helpdesk email-to-ticket",
+      "disposition": "excluded",
+      "detail": "Internal CRM helpdesk feature, not a provider-defined service access interface"
+    }
+  ],
+  "channel_evidence": {
+    "Interactive": "observed",
+    "Agentic": "no_evidence_observed",
+    "Conversational": "observed",
+    "Event": "no_evidence_observed",
+    "Programmatic": "observed"
+  },
+  "number_of_interfaces": 4,
+  "multi_interface": true,
+  "number_of_channels": 3,
+  "multi_channel": true
+}

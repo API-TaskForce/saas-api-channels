@@ -54,7 +54,7 @@ The Apps SDK, the Connect REST API, and the remote MCP server were recently unif
 
 ```json
 {
-  "schema_version": "2.1",
+  "schema_version": "1.0",
   "generator": {
     "platform": "Claude",
     "provider": "Anthropic",
